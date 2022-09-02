@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://region-registry.skedgo.com/feed.schema.json",
+  "title": "Feed",
+  "description": "Feed specification.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "Unique identifier for this feed.",
+      "type": "string"
+    },  
+    "name": {
+      "description": "Human friendly name for this feed.",
+      "type": "string",
+    },
+    "type": {
+      "description": "Type of this feed.",
+      "enum": ["gtfs", "netex", "txc", "coaches"],
+      "default": "gtfs"
+    },
+    "source": {
+      "description": "Details about how to get this feed.",
+      "type": "object",
+      "properties": {
+        "url": {
+          "description": "URL where this feed can downloaded.",
+          "type": "string"
+        },
+        "headers": {
+          "description": "HTTP headers to include in order to download this feed.",
+          "type": "object",
+          "additionalProperties": {"type": "string"}
+        },
+        "checkCertificate": {
+          "description": "(Only for HTTPS requests) Whether to check or not the https certificates when downloading this feed.",
+          "type": "boolean",
+        },
+        "credentials": {
+          "description": "Credentials for Basic Authentication. (Alternatively, you can provide a Basic Auth header in the headers field.)",
+          "type": "object",
+          "properties": {
+            "user": {
+              "description": "User name for Basic Auth",
+              "type": "string"
+            },
+            "pass": {
+              "description": "Password for Basic Auth",
+              "type": "string"
+            }
+          }
+        },
+        "timestampCheck": {
+          "description": "Enables timestamp checking between a preoviuos feed and the one from the external source.",
+          "type": "boolean"
+        },
+        "sourceOfSource": {
+          "description": "URL of the provider of this feed.",
+          "type": "string"
+        },
+        "hardCoded": {
+          "description": "If the URL contains identifiers, dates, etc.",
+          "type": "boolean"
+        },
+        "outputFileName": {
+          "description": "The name of the file to store this feed. If this is not specified, then it will be taken from Content-Disposition response header or from the URL file name.",
+          "type": "string"
+        }
+      }, 
+      "required": [ "url" ]
+    },
+    "hasRT": {
+      "description": "If this feed should be enhanced with real time information.",
+      "type": "boolean"
+    },
+    "excludedFiles": {
+      "description": "List of the files to exclude when parsing this feed.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "includeOnlyFiles": {
+      "description": "List of the files to include when parsing this feed.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [ "id", "name", "source" ]
+}
