@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-04/schema#",
   "$id": "https://region-registry.skedgo.com/region.schema.json",
   "title": "Region",
   "description": "Region specification",
@@ -56,7 +56,8 @@
           "required": [ "lat", "lng", "address" ]
         },
         "polygon": {
-
+          "description": "covered area",
+          "type": "string"
         }
       },
       "required": [ "defaultLocation", "polygon" ]
