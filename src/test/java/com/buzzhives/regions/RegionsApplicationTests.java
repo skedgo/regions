@@ -8,6 +8,7 @@ import lombok.val;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 
 @CommonsLog
@@ -16,7 +17,7 @@ class RegionsApplicationTests {
     @Test
     void validJson() throws IOException {
         val factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V4);
-        val jsonSchema = factory.getSchema(RegionsApplicationTests.class.getResourceAsStream("/schema/region.schema.json"));
+        val jsonSchema = factory.getSchema(new FileInputStream("schemas/region.schema.json"));
         val jsonNode = new ObjectMapper().readTree("{\n" +
                 "\t\"code\": \"ar_b_bahiablanca\",\n" +
                 "\t\"timezone\": \"America/Argentina/Buenos_Aires\",\n" +
