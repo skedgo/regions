@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 @CommonsLog
 class RegionsApplicationTests {
@@ -17,7 +19,7 @@ class RegionsApplicationTests {
     @Test
     void validJson() throws IOException {
         val factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V4);
-        val jsonSchema = factory.getSchema(new FileInputStream("schemas/region.schema.json"));
+        val jsonSchema = factory.getSchema(Files.newInputStream(Paths.get("schemas/region.schema.json")));
         val jsonNode = new ObjectMapper().readTree("{\n" +
                 "\t\"code\": \"ar_b_bahiablanca\",\n" +
                 "\t\"timezone\": \"America/Argentina/Buenos_Aires\",\n" +
