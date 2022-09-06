@@ -51,10 +51,6 @@
           "description": "The ISO 4217 currency code of this currency.",
           "type": "string"
         },
-        "symbol": {
-          "description": "The symbol of this currency for the specified locale. For example, for the US Dollar, the symbol is '$'' if the specified locale is the US, while for other locales it may be 'US$'",
-          "type": "string"
-        },
         "format": {
           "description": "Format details of the currency.",
           "type": "object",
