@@ -56,10 +56,6 @@
         "hardCoded": {
           "description": "If the URL contains identifiers, dates, etc.",
           "type": "boolean"
-        },
-        "outputFileName": {
-          "description": "The name of the file to store this feed. If this is not specified, then it will be taken from Content-Disposition response header or from the URL file name.",
-          "type": "string"
         }
       }, 
       "required": [ "url" ]
