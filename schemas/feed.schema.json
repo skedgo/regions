@@ -33,7 +33,8 @@
         },
         "checkCertificate": {
           "description": "(Only for HTTPS requests) Whether to check or not the https certificates when downloading this feed.",
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "credentials": {
           "description": "Credentials for Basic Authentication. (Alternatively, you can provide a Basic Auth header in the headers field.)",
