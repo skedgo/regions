@@ -119,5 +119,5 @@
       "uniqueItems": true
     }
   },
-  "required": [ "code", "timezone", "locale", "coverage", "currency", "servers" , "feeds" ]
+  "required": [ "code", "timezone", "locale", "coverage", "currency" ]
 }
