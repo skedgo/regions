@@ -15,7 +15,7 @@
     },
     "type": {
       "description": "Type of this feed.",
-      "enum": ["gtfs", "netex", "txc", "coaches"],
+      "enum": ["gtfs", "netex", "txc"],
       "default": "gtfs"
     },
     "source": {
