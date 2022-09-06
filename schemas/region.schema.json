@@ -100,15 +100,6 @@
       "description": "Traffic side on the road to keep to.",
       "enum": ["left", "right"]
     },
-    "eligibility": {
-      "description": "This region eligibility.",
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "minItems": 1,
-      "uniqueItems": true
-    },
     "feeds": {
       "description": "Set of public transport feeds for this region",
       "type": "array",
