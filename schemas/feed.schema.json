@@ -49,9 +49,20 @@
             }
           }
         },
-        "sourceOfSource": {
-          "description": "URL of the provider of this feed.",
-          "type": "string"
+        "dataProvider": {
+          "description": "Data provider details.",
+          "type": "object",
+          "properties": {
+            "name": {
+              "description": "Name of the provider",
+              "type": "string"
+            },
+            "url": {
+              "description": "Website of the provider",
+              "type": "string"
+            }
+          },
+          "required": [ "name" , "url" ]
         },
         "hardCoded": {
           "description": "If the URL contains identifiers, dates, etc.",
