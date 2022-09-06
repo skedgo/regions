@@ -32,28 +32,10 @@
       "description": "Coverage details.",
       "type": "object",
       "properties": {
-        "defaultLocation": {
-          "description": "Default location of this region.",
-          "type": "object",
-          "properties": {
-            "lat": {
-              "description": "Latitude coordinate.",
-              "type": "number",
-              "minimum": -90,
-              "maximum": 90
-            },
-            "lng": {
-              "description": "Longitude coordinate.",
-              "type": "number",
-              "minimum": -180,
-              "maximum": 180
-            },
-            "address": {
-              "description": "City name of this location.",
-              "type": "string"
-            }
-          },
-          "required": [ "lat", "lng", "address" ]
+        "cities": {
+          "description": "List of cities that this region contains.",
+          "type": "array",
+          "items": { "$ref": "#/$defs/city" }
         },
         "polygon": {
 
@@ -110,5 +92,29 @@
       "uniqueItems": true
     }
   },
-  "required": [ "code", "timezone", "locale", "coverage", "currency" , "trafficRule"]
+  "required": [ "code", "timezone", "locale", "coverage", "currency" , "trafficRule"],
+  "$defs": {
+    "city": {
+      "type": "object",
+      "properties": {
+        "lat": {
+          "description": "Latitude coordinate.",
+          "type": "number",
+          "minimum": -90,
+          "maximum": 90
+        },
+        "lng": {
+          "description": "Longitude coordinate.",
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180
+        },
+        "address": {
+          "description": "Name of this location.",
+          "type": "string"
+        }
+      },
+      "required": [ "lat", "lng", "address" ]
+    }
+  }
 }
