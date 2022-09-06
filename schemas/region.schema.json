@@ -50,24 +50,8 @@
         "code": {
           "description": "The ISO 4217 currency code of this currency.",
           "type": "string"
-        },
-        "format": {
-          "description": "Format details of the currency.",
-          "type": "object",
-          "properties": {
-            "unit": {
-              "description": "The main unit pattern of this currency. Example: '£0'",
-              "type": "string"
-            },
-            "subunit": {
-              "description": "The subunit pattern of this currency if any. Example: '£0.00'",
-              "type": "string"
-            }
-          },
-          "required": [ "unit" ]
         }
-      },
-      "required" : [ "format" ]
+      }
     }, 
     "measurementSystem": {
       "description": "Measurement system to use in this region.",
