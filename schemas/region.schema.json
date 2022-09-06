@@ -96,7 +96,7 @@
       "enum": ["metric", "imperial"],
       "default": "metric"
     }, 
-    "trafficHand": {
+    "trafficRule": {
       "description": "Traffic side on the road to keep to. 'lht' for left , 'rht' for right.",
       "enum": ["lht", "rht"],
       "default": "rht"      
