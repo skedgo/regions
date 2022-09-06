@@ -64,10 +64,6 @@
             }
           },
           "required": [ "name" , "url" ]
-        },
-        "hardCoded": {
-          "description": "If the URL contains identifiers, dates, etc.",
-          "type": "boolean"
         }
       }, 
       "required": [ "url" ]
