@@ -49,10 +49,6 @@
             }
           }
         },
-        "timestampCheck": {
-          "description": "Enables timestamp checking between a preoviuos feed and the one from the external source.",
-          "type": "boolean"
-        },
         "sourceOfSource": {
           "description": "URL of the provider of this feed.",
           "type": "string"
