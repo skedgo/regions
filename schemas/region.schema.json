@@ -100,15 +100,6 @@
       "description": "Traffic side on the road to keep to.",
       "enum": ["left", "right"]
     },
-    "servers": {
-      "description": "Servers to allocate this region.",
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "minItems": 1,
-      "uniqueItems": true
-    },
     "eligibility": {
       "description": "This region eligibility.",
       "type": "array",
