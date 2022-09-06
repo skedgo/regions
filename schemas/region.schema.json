@@ -97,9 +97,8 @@
       "default": "metric"
     }, 
     "trafficRule": {
-      "description": "Traffic side on the road to keep to. 'lht' for left , 'rht' for right.",
-      "enum": ["lht", "rht"],
-      "default": "rht"      
+      "description": "Traffic side on the road to keep to.",
+      "enum": ["left", "right"]
     },
     "servers": {
       "description": "Servers to allocate this region.",
