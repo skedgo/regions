@@ -6,8 +6,23 @@
   "type": "object",
   "properties": {
     "code": {
-      "description": "The unique identifier for a region.",
-      "type": "string"
+      "description": "Code details for this region.",
+      "type": "object",
+      "properties": {
+        "countryCode": {
+          "description": "A valid ISO 3166-1 alpha-2 code.",
+          "type": "string"
+        },
+        "subdivisionCode": {
+          "description": "A valid ISO 3166-2 code.",
+          "type": "string"
+        },
+        "cityName": {
+          "description": "Name of City. Main city if this region covers multiple cities.",
+          "type": "string"
+        }
+      },
+      "required": [ "countryCode", "cityName" ]
     },
     "timezone": {
       "description": "A Java valid time zone id.",
