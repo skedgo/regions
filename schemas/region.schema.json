@@ -11,7 +11,8 @@
       "properties": {
         "countryCode": {
           "description": "A valid ISO 3166-1 alpha-2 code.",
-          "type": "string"
+          "type": "string",
+          "pattern": "^[a-z]{2}$"
         },
         "subdivisionCode": {
           "description": "A valid ISO 3166-2 code.",
