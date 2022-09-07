@@ -54,8 +54,7 @@
           "items": { "$ref": "#/$defs/city" }
         },
         "polygon": {
-          "$ref": "https://geojson.org/schema/Polygon.json",
-          "additionalProperties": false
+          "$ref": "https://geojson.org/schema/Polygon.json"
         }
       },
       "required": [ "cities", "polygon" ]
