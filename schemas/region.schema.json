@@ -60,15 +60,8 @@
       "required": [ "cities", "polygon" ]
     },
     "currency": {
-      "description": "Details of the currency used in this region.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "The ISO 4217 currency code of this currency.",
-          "type": "string"
-        }
-      },
-      "required": [ "code" ]
+      "description": "The ISO 4217 currency code of this currency.",
+      "type": "string"
     }, 
     "measurementSystem": {
       "description": "Measurement system to use in this region.",
