@@ -74,7 +74,7 @@
       "enum": ["left", "right"]
     },
     "feeds": {
-      "description": "Set of public transport feeds for this region",
+      "description": "Set of public transport feeds for this region. Each item must match with a public transport data feed id.",
       "type": "array",
       "items": {
         "type": "string"
