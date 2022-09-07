@@ -69,9 +69,14 @@
       }, 
       "required": [ "url" ]
     },
-    "hasRT": {
-      "description": "If this feed should be enhanced with real time information.",
-      "type": "boolean"
+    "realtime": {
+      "description": "Real time feeds associated to this feed. Each item should match with a real-time-feed id.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true,
+      "minItems": 1
     },
     "excludedFiles": {
       "description": "List of the files to exclude when parsing this feed.",
