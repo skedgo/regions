@@ -1,6 +1,7 @@
 package com.buzzhives.regions;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.networknt.schema.JsonSchema;
 import com.networknt.schema.JsonSchemaFactory;
 import com.networknt.schema.SpecVersion;
 import com.networknt.schema.ValidationMessage;
@@ -22,38 +23,40 @@ import java.util.stream.Collectors;
 @CommonsLog
 class RegionsApplicationTests {
 
-    @Test
-    void validRegionJson() throws IOException {
+    @NotNull
+    private static final JsonSchema REGION_SCHEMA;
+    @NotNull
+    private static final JsonSchema PUBLIC_TRANSPORT_FEED_SCHEMA;
+
+    static {
         val factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V7);
-        val jsonSchema = factory.getSchema(Files.newInputStream(Paths.get("schemas/region.schema.json")));
+        try {
+            REGION_SCHEMA = factory.getSchema(Files.newInputStream(Paths.get("schemas/region.schema.json")));
+            PUBLIC_TRANSPORT_FEED_SCHEMA = factory.getSchema(Files.newInputStream(Paths.get("schemas/public-transport-feed.schema.json")));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    void singleRegionTest() throws IOException {
         val jsonNode = new ObjectMapper().readTree(new File("regions/ar_b_bahiablanca.json"));
-        val errors = jsonSchema.validate(jsonNode);
+        val errors = REGION_SCHEMA.validate(jsonNode);
         Assertions.assertThat(errors).isEmpty();
         log.info(" no errors found. ");
     }
 
     @Test
-    void validPublicTransportDataFeedJson() throws IOException {
-        val factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V7);
-        val jsonSchema = factory.getSchema(Files.newInputStream(Paths.get("schemas/public-transport-feed.schema.json")));
+    void singlePublicTransportDataFeedTest() throws IOException {
         val jsonNode = new ObjectMapper().readTree(new File("publictransportfeeds/ar-sapem.json"));
-        val errors = jsonSchema.validate(jsonNode);
+        val errors = PUBLIC_TRANSPORT_FEED_SCHEMA.validate(jsonNode);
         Assertions.assertThat(errors).isEmpty();
         log.info(" no errors found. ");
     }
 
-    private Set<ValidationMessage> validRegion(@NotNull Path path) throws IOException {
-        val factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V7);
-        val jsonSchema = factory.getSchema(Files.newInputStream(Paths.get("schemas/region.schema.json")));
+    private Set<ValidationMessage> validateJson(@NotNull Path path, @NotNull JsonSchema schema) throws IOException {
         val jsonNode = new ObjectMapper().readTree(path.toFile());
-        return jsonSchema.validate(jsonNode);
-    }
-
-    private Set<ValidationMessage> validPublicTransportFeed(@NotNull Path path) throws IOException {
-        val factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V7);
-        val jsonSchema = factory.getSchema(Files.newInputStream(Paths.get("schemas/public-transport-feed.schema.json")));
-        val jsonNode = new ObjectMapper().readTree(path.toFile());
-        return jsonSchema.validate(jsonNode);
+        return schema.validate(jsonNode);
     }
 
     @Test
@@ -62,14 +65,14 @@ class RegionsApplicationTests {
 
         for (val path : regions.collect(Collectors.toSet())) {
             log.info("Validating " + path.toString());
-            val errors = validRegion(path);
+            val errors = validateJson(path, REGION_SCHEMA);
             Assertions.assertThat(errors).isEmpty();
         }
 
         @Cleanup val publicTransportFeeds = Files.list(Paths.get("publictransportfeeds"));
         for (val path : publicTransportFeeds.collect(Collectors.toSet())) {
             log.info("Validating " + path.toString());
-            val errors = validPublicTransportFeed(path);
+            val errors = validateJson(path, PUBLIC_TRANSPORT_FEED_SCHEMA);
             Assertions.assertThat(errors).isEmpty();
         }
     }
