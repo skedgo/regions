@@ -6,8 +6,9 @@
   "type": "object",
   "properties": {
     "id": {
-      "description": "Unique identifier for this feed.",
-      "type": "string"
+      "description": "Unique identifier for this feed. Recommended format is ISO Country Code + Provider name; for example au-tfnsw. For multi country feeds, recommended format is Continent Code + Provider name; for example eu-flixbus.",
+      "type": "string",
+      "pattern": "^[a-z]{2}-(([a-z]|-|_)+)$"
     },  
     "name": {
       "description": "Human friendly name for this feed.",
