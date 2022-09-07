@@ -18,13 +18,24 @@ import java.nio.file.Paths;
 class RegionsApplicationTests {
 
     @Test
-    void validJson() throws IOException {
+    void validRegionJson() throws IOException {
         val factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V7);
         val jsonSchema = factory.getSchema(Files.newInputStream(Paths.get("schemas/region.schema.json")));
         val jsonNode = new ObjectMapper().readTree(new File("regions/ar_b_bahiablanca.json"));
         val errors = jsonSchema.validate(jsonNode);
         Assertions.assertThat(errors).isEmpty();
         log.info(" no errors found. ");
+    }
+
+    @Test
+    void validPublicTransportDataFeedJson() throws IOException {
+        val factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V7);
+        val jsonSchema = factory.getSchema(Files.newInputStream(Paths.get("schemas/public-transport-feed.schema.json")));
+        val jsonNode = new ObjectMapper().readTree(new File("publictransportfeeds/ar-sapem.json"));
+        val errors = jsonSchema.validate(jsonNode);
+        Assertions.assertThat(errors).isEmpty();
+        log.info(" no errors found. ");
+
     }
 
 }
