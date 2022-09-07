@@ -57,7 +57,7 @@
           "additionalProperties": false
         }
       },
-      "required": [ "defaultLocation", "polygon" ]
+      "required": [ "cities", "polygon" ]
     },
     "currency": {
       "description": "Details of the currency used in this region.",
