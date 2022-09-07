@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://region-registry.skedgo.com/feed.schema.json",
+  "$id": "https://region-registry.skedgo.com/public-transport-feed.schema.json",
   "title": "Public Transport Data Feed",
   "description": "Public Transport Data Feed specification.",
   "type": "object",
