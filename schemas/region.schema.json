@@ -26,7 +26,7 @@
       "required": [ "countryCode", "cityName" ]
     },
     "timezone": {
-      "description": "A Java valid time zone id.",
+      "description": "A valid id from the IANA time zone database. For more information: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones",
       "type": "string"
     },
     "locale": {
