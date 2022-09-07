@@ -36,16 +36,16 @@
           "type": "boolean",
           "default": true
         },
-        "credentials": {
-          "description": "Credentials for Basic Authentication. (Alternatively, you can provide a Basic Auth header in the headers field.)",
+        "authentication": {
+          "description": "Authentication details.",
           "type": "object",
           "properties": {
-            "user": {
-              "description": "User name for Basic Auth",
-              "type": "string"
+            "type": {
+              "description": "Authentication mode type",
+              "enum": [ "header" , "query", "userpass" ]
             },
-            "pass": {
-              "description": "Password for Basic Auth",
+            "description": {
+              "description": "Description of this authentication mode type",
               "type": "string"
             }
           }
