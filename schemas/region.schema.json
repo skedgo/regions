@@ -1,16 +1,32 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://region-registry.skedgo.com/region.schema.json",
   "title": "Region",
   "description": "Region specification",
   "type": "object",
   "properties": {
     "code": {
-      "description": "The unique identifier for a region.",
-      "type": "string"
+      "description": "Code details for this region.",
+      "type": "object",
+      "properties": {
+        "countryCode": {
+          "description": "A valid ISO 3166-1 alpha-2 code.",
+          "type": "string",
+          "pattern": "^[a-z]{2}$"
+        },
+        "subdivisionCode": {
+          "description": "A valid ISO 3166-2 code.",
+          "type": "string"
+        },
+        "cityName": {
+          "description": "Name of City. Main city if this region covers multiple cities.",
+          "type": "string"
+        }
+      },
+      "required": [ "countryCode", "cityName" ]
     },
     "timezone": {
-      "description": "A Java valid time zone id.",
+      "description": "A valid id from the IANA time zone database. For more information: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones",
       "type": "string"
     },
     "locale": {
@@ -32,95 +48,33 @@
       "description": "Coverage details.",
       "type": "object",
       "properties": {
-        "defaultLocation": {
-          "description": "Default location of this region.",
-          "type": "object",
-          "properties": {
-            "lat": {
-              "description": "Latitude coordinate.",
-              "type": "number",
-              "minimum": -90,
-              "maximum": 90
-            },
-            "lng": {
-              "description": "Longitude coordinate.",
-              "type": "number",
-              "minimum": -180,
-              "maximum": 180
-            },
-            "address": {
-              "description": "City name of this location.",
-              "type": "string"
-            }
-          },
-          "required": [ "lat", "lng", "address" ]
+        "cities": {
+          "description": "List of cities that this region contains.",
+          "type": "array",
+          "items": { "$ref": "#/$defs/city" }
         },
         "polygon": {
-
+          "$ref": "https://geojson.org/schema/Polygon.json",
+          "additionalProperties": false
         }
       },
-      "required": [ "defaultLocation", "polygon" ]
+      "required": [ "cities", "polygon" ]
     },
     "currency": {
-      "description": "Details of the currency used in this region.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "The ISO 4217 currency code of this currency.",
-          "type": "string"
-        },
-        "symbol": {
-          "description": "The symbol of this currency for the specified locale. For example, for the US Dollar, the symbol is '$'' if the specified locale is the US, while for other locales it may be 'US$'",
-          "type": "string"
-        },
-        "format": {
-          "description": "Format details of the currency.",
-          "type": "object",
-          "properties": {
-            "unit": {
-              "description": "The main unit pattern of this currency. Example: '£0'",
-              "type": "string"
-            },
-            "subunit": {
-              "description": "The subunit pattern of this currency if any. Example: '£0.00'",
-              "type": "string"
-            }
-          },
-          "required": [ "unit" ]
-        }
-      },
-      "required" : [ "format" ]
+      "description": "The ISO 4217 currency code of this currency.",
+      "type": "string"
     }, 
     "measurementSystem": {
       "description": "Measurement system to use in this region.",
       "enum": ["metric", "imperial"],
       "default": "metric"
     }, 
-    "trafficHand": {
-      "description": "Traffic side on the road to keep to. 'lht' for left , 'rht' for right.",
-      "enum": ["lht", "rht"],
-      "default": "rht"      
-    },
-    "servers": {
-      "description": "Servers to allocate this region.",
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "minItems": 1,
-      "uniqueItems": true
-    },
-    "eligibility": {
-      "description": "This region eligibility.",
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "minItems": 1,
-      "uniqueItems": true
+    "trafficRule": {
+      "description": "Traffic side on the road to keep to.",
+      "enum": ["left", "right"]
     },
     "feeds": {
-      "description": "Set of public transport feeds for this region",
+      "description": "Set of public transport feeds for this region. Each item must match with a public transport data feed id.",
       "type": "array",
       "items": {
         "type": "string"
@@ -129,5 +83,29 @@
       "uniqueItems": true
     }
   },
-  "required": [ "code", "timezone", "locale", "coverage", "currency", "servers" , "feeds" ]
+  "required": [ "code", "timezone", "locale", "coverage", "currency" , "trafficRule"],
+  "$defs": {
+    "city": {
+      "type": "object",
+      "properties": {
+        "lat": {
+          "description": "Latitude coordinate.",
+          "type": "number",
+          "minimum": -90,
+          "maximum": 90
+        },
+        "lng": {
+          "description": "Longitude coordinate.",
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180
+        },
+        "name": {
+          "description": "Name of this location.",
+          "type": "string"
+        }
+      },
+      "required": [ "lat", "lng", "name" ]
+    }
+  }
 }
