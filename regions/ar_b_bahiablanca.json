@@ -55,5 +55,6 @@
       ]
     }},
   "currency": "ARS",
-  "trafficRule": "right"
+  "trafficRule": "right",
+  "feeds": [ "ar-sapem" ]
 }

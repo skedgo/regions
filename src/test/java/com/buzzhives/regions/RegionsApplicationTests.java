@@ -19,8 +19,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @CommonsLog
@@ -57,39 +56,40 @@ class RegionsApplicationTests {
         log.info(" no errors found. ");
     }
 
-    private Set<ValidationMessage> validateJson(@NotNull Path path, @NotNull JsonSchema schema) throws IOException {
+    private static Set<ValidationMessage> validateJson(@NotNull Path path, @NotNull JsonSchema schema) throws IOException {
         val jsonNode = new ObjectMapper().readTree(path.toFile());
         return schema.validate(jsonNode);
     }
 
-    @Test
-    void valid() throws IOException {
-
-        val regions = new HashSet<RegionSchema>();
-
-        @Cleanup val regionFiles = Files.list(Paths.get("regions"));
+    @NotNull
+    private static <T> Set<T> validateAndParse(@NotNull Class<T> klass,
+                                               @NotNull JsonSchema schema,
+                                               @NotNull String directoryPath) throws IOException {
+        val set = new HashSet<T>();
+        @Cleanup val regionFiles = Files.list(Paths.get(directoryPath));
         for (val path : regionFiles.collect(Collectors.toSet())) {
             log.info("Validating " + path.toString());
-            val errors = validateJson(path, REGION_SCHEMA);
-            Assertions.assertThat(errors).isEmpty();
-            val region = new ObjectMapper().readValue(path.toFile(), RegionSchema.class);
-            regions.add(region);
+            Assertions.assertThat(validateJson(path, schema)).isEmpty();
+            set.add(new ObjectMapper().readValue(path.toFile(), klass));
         }
+        return set;
+    }
 
-        log.info(regions.size() + " regions validated.");
+    @Test
+    void valid() throws IOException {
+        val regions = validateAndParse(RegionSchema.class, REGION_SCHEMA, "regions");
+        val publicTransportFeedsMap = validateAndParse(PublicTransportFeedSchema.class, PUBLIC_TRANSPORT_FEED_SCHEMA, "publictransportfeeds")
+                .stream()
+                .collect(Collectors.toMap(PublicTransportFeedSchema::getId, publicTransportFeed -> publicTransportFeed, (a, b) -> b, HashMap::new));
 
-        val publicTransportFeeds = new HashSet<PublicTransportFeedSchema>();
-
-        @Cleanup val publicTransportFeedsFiles = Files.list(Paths.get("publictransportfeeds"));
-        for (val path : publicTransportFeedsFiles.collect(Collectors.toSet())) {
-            log.info("Validating " + path.toString());
-            val errors = validateJson(path, PUBLIC_TRANSPORT_FEED_SCHEMA);
-            Assertions.assertThat(errors).isEmpty();
-            val publicTransportFeedSchema = new ObjectMapper().readValue(path.toFile(), PublicTransportFeedSchema.class);
-            publicTransportFeeds.add(publicTransportFeedSchema);
+        //check that all regions have a valid and existent feed
+        for (val region : regions) {
+            val publicTransportFeedRefs = region.getFeeds();
+            if (publicTransportFeedRefs != null && !publicTransportFeedRefs.isEmpty())  {
+                val feedIds = publicTransportFeedRefs.toArray(new String[0]);
+                Assertions.assertThat(publicTransportFeedsMap).containsKeys(feedIds);
+            }
         }
-
-        log.info(publicTransportFeeds.size() + " public transport feeds validated.");
     }
 
 }
