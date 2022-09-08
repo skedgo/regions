@@ -1,5 +1,7 @@
 package com.buzzhives.regions;
 
+import com.buzzhives.model.PublicTransportFeedSchema;
+import com.buzzhives.model.RegionSchema;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.networknt.schema.JsonSchema;
 import com.networknt.schema.JsonSchemaFactory;
@@ -17,6 +19,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -61,20 +64,32 @@ class RegionsApplicationTests {
 
     @Test
     void valid() throws IOException {
-        @Cleanup val regions = Files.list(Paths.get("regions"));
 
-        for (val path : regions.collect(Collectors.toSet())) {
+        val regions = new HashSet<RegionSchema>();
+
+        @Cleanup val regionFiles = Files.list(Paths.get("regions"));
+        for (val path : regionFiles.collect(Collectors.toSet())) {
             log.info("Validating " + path.toString());
             val errors = validateJson(path, REGION_SCHEMA);
             Assertions.assertThat(errors).isEmpty();
+            val region = new ObjectMapper().readValue(path.toFile(), RegionSchema.class);
+            regions.add(region);
         }
 
-        @Cleanup val publicTransportFeeds = Files.list(Paths.get("publictransportfeeds"));
-        for (val path : publicTransportFeeds.collect(Collectors.toSet())) {
+        log.info(regions.size() + " regions validated.");
+
+        val publicTransportFeeds = new HashSet<PublicTransportFeedSchema>();
+
+        @Cleanup val publicTransportFeedsFiles = Files.list(Paths.get("publictransportfeeds"));
+        for (val path : publicTransportFeedsFiles.collect(Collectors.toSet())) {
             log.info("Validating " + path.toString());
             val errors = validateJson(path, PUBLIC_TRANSPORT_FEED_SCHEMA);
             Assertions.assertThat(errors).isEmpty();
+            val publicTransportFeedSchema = new ObjectMapper().readValue(path.toFile(), PublicTransportFeedSchema.class);
+            publicTransportFeeds.add(publicTransportFeedSchema);
         }
+
+        log.info(publicTransportFeeds.size() + " public transport feeds validated.");
     }
 
 }
