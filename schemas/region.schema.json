@@ -16,11 +16,13 @@
         },
         "subdivisionCode": {
           "description": "A valid ISO 3166-2 code.",
-          "type": "string"
+          "type": "string",
+          "minLength": 1
         },
         "cityName": {
           "description": "Name of City. Main city if this region covers multiple cities.",
-          "type": "string"
+          "type": "string",
+          "minLength": 1
         }
       },
       "required": [ "countryCode", "cityName" ]
@@ -38,7 +40,7 @@
           "type": "string"
         },
         "country": {
-          "description": "An ISO 3166 alpha-2 country code or a UN M.49 numeric-3 area code.",
+          "description": "A valid ISO 3166-1 alpha-2 code.",
           "type": "string"
         }
       },
@@ -51,7 +53,8 @@
         "cities": {
           "description": "List of cities that this region contains.",
           "type": "array",
-          "items": { "$ref": "#/$defs/city" }
+          "items": { "$ref": "#/$defs/city" },
+          "minItems": 1
         },
         "polygon": {
           "$ref": "https://geojson.org/schema/Polygon.json"
@@ -101,7 +104,8 @@
         },
         "name": {
           "description": "Name of this location.",
-          "type": "string"
+          "type": "string",
+          "minLength": 1
         }
       },
       "required": [ "lat", "lng", "name" ]

@@ -12,7 +12,9 @@
     },  
     "name": {
       "description": "Human friendly name for this feed.",
-      "type": "string"
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(([A-Z]|[a-z]|-|_)+)$"
     },
     "type": {
       "description": "Type of this feed.",
