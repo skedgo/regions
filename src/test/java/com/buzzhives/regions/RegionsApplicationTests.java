@@ -14,6 +14,7 @@ import lombok.val;
 import org.apache.commons.validator.routines.UrlValidator;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.Condition;
+import org.assertj.core.description.Description;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 
@@ -107,7 +108,7 @@ class RegionsApplicationTests {
         for (val region : regions) {
             //check the code of the regions and its uniqueness
             val code = region.getCode();
-            Assertions.assertThat(code).isNotIn(regionCodes);
+            Assertions.assertThat(code).as("duplicated region code: " + code.toString()).isNotIn(regionCodes);
             regionCodes.add(code);
             Assertions.assertThat(code.getCountryCode()).isIn(ISO_COUNTRIES);
             val locale = region.getLocale();
