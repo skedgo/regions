@@ -69,7 +69,7 @@
           "required": [ "name" , "url" ]
         }
       }, 
-      "required": [ "url" ]
+      "required": [ "url" , "dataProvider" ]
     },
     "realtime": {
       "description": "Real time feeds associated to this feed. Each item should match with a real-time-feed id.",
