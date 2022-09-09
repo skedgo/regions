@@ -4,9 +4,18 @@
   "type": "gtfs",
   "source": {
     "url": "https://apitransporte.buenosaires.gob.ar/colectivos/feed-gtfs?client_id=d3d3c80dc41a40dbb13dc2654c9e01ca&client_secret=048bcD1A07DD4F32BdF0AdC5D46456af",
-    "dataProvider": {
+    "apiInformation": {
       "name": "API Transporte – Datos Abiertos",
       "url": "https://apitransporte.buenosaires.gob.ar/console/"
     }
-  }
+  },
+  "dataProvider": {
+    "name": "Gobierno de la Ciudad de Buenos Aires",
+    "url": "https://www.buenosaires.gob.ar/"
+  },
+  "license": {
+    "name": "Licence: Creative Commons Atribución 2.5 (Argentina)",
+    "url": "https://creativecommons.org/licenses/by/2.5/ar/legalcode"
+  },
+  "realtime": [ "ar-babusrt" ]
 }
