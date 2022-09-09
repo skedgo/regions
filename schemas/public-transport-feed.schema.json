@@ -69,7 +69,22 @@
           "required": [ "name" , "url" ]
         }
       }, 
-      "required": [ "url" ]
+      "required": [ "url" , "dataProvider" ]
+    },
+    "license": {
+      "description": "License details.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of this license",
+          "type": "string"
+        },
+        "url": {
+          "description": "License's URL",
+          "type": "string"
+        }
+      },
+      "required": [ "name", "url" ]
     },
     "realtime": {
       "description": "Real time feeds associated to this feed. Each item should match with a real-time-feed id.",
