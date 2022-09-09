@@ -87,14 +87,17 @@ class RegionsApplicationTests {
 
     @Test
     void validate() throws IOException {
+
+
         val regions = validateAndParse(RegionSchema.class, REGION_SCHEMA, "regions");
         val publicTransportFeeds = validateAndParse(PublicTransportFeedSchema.class, PUBLIC_TRANSPORT_FEED_SCHEMA, "publictransportfeeds");
-
         val publicTransportFeedsMap = new HashMap<String, PublicTransportFeedSchema>();
+        val validUrlCondition = new Condition<String>(s -> new UrlValidator().isValid(s), "a valid URL");
         for (val publicTransportFeed : publicTransportFeeds) {
             Assertions.assertThat(publicTransportFeed.getId()).isNotIn(publicTransportFeedsMap.keySet());
             publicTransportFeedsMap.put(publicTransportFeed.getId(), publicTransportFeed);
-            Assertions.assertThat(publicTransportFeed.getSource().getUrl()).is(new Condition<>(s -> new UrlValidator().isValid(s), "a valid URL"));
+            Assertions.assertThat(publicTransportFeed.getSource().getUrl()).is(validUrlCondition);
+            Assertions.assertThat(publicTransportFeed.getSource().getDataProvider().getUrl()).is(validUrlCondition);
 
             //todo check that real time feeds are valid and existent
         }
