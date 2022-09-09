@@ -91,13 +91,13 @@
       "type": "object",
       "properties": {
         "lat": {
-          "description": "Latitude coordinate.",
+          "description": "Latitude coordinate in WGS-84 format.",
           "type": "number",
           "minimum": -90,
           "maximum": 90
         },
         "lng": {
-          "description": "Longitude coordinate.",
+          "description": "Longitude coordinate in WGS-84 format.",
           "type": "number",
           "minimum": -180,
           "maximum": 180
