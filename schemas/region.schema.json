@@ -104,7 +104,7 @@
           "maximum": 180
         },
         "name": {
-          "description": "Name of this location.",
+          "description": "Name of this city.",
           "type": "string",
           "minLength": 1
         }
