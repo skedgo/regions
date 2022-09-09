@@ -57,7 +57,9 @@
             }
           }
         }
-      }
+      },
+      "required": [ "url" ]
     }
-  }
+  },
+  "required": [ "id", "name", "source" ]
 }
