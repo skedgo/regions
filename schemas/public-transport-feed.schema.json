@@ -53,23 +53,38 @@
             }
           }
         },
-        "dataProvider": {
-          "description": "Data provider details.",
+        "apiInformation": {
+          "description": "Information about the API where this feed is published.",
           "type": "object",
           "properties": {
             "name": {
-              "description": "Name of the provider",
+              "description": "Name or description of this API",
               "type": "string"
             },
             "url": {
-              "description": "Website of the provider",
+              "description": "Website of the API",
               "type": "string"
             }
           },
           "required": [ "name" , "url" ]
         }
       }, 
-      "required": [ "url" , "dataProvider" ]
+      "required": [ "url" ]
+    },
+    "dataProvider": {
+      "description": "Data provider details.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the provider",
+          "type": "string"
+        },
+        "url": {
+          "description": "Website of the provider",
+          "type": "string"
+        }
+      },
+      "required": [ "name" , "url" ]
     },
     "license": {
       "description": "License details.",
@@ -110,5 +125,5 @@
       }
     }
   },
-  "required": [ "id", "name", "source" ]
+  "required": [ "id", "name", "source", "dataProvider" ]
 }
