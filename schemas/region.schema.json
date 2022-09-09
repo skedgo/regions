@@ -57,6 +57,7 @@
           "minItems": 1
         },
         "polygon": {
+          "description": "Area that this region covers. Cutouts are not allowed.",
           "$ref": "https://geojson.org/schema/Polygon.json"
         }
       },
