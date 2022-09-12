@@ -65,7 +65,7 @@ class RegionsApplicationTests {
 
     @Test
     void singlePublicTransportDataFeedTest() throws IOException {
-        val jsonNode = new ObjectMapper().readTree(new File("publictransportfeeds/ar-sapem.json"));
+        val jsonNode = new ObjectMapper().readTree(new File("pt-static-feeds/ar-sapem.json"));
         val errors = PUBLIC_TRANSPORT_FEED_SCHEMA.validate(jsonNode);
         Assertions.assertThat(errors).isEmpty();
         log.info(" no errors found. ");
@@ -95,8 +95,8 @@ class RegionsApplicationTests {
 
 
         val regions = validateAndParse(RegionSchema.class, REGION_SCHEMA, "regions");
-        val publicTransportFeeds = validateAndParse(PublicTransportFeedSchema.class, PUBLIC_TRANSPORT_FEED_SCHEMA, "publictransportfeeds");
-        val realtimeDataFeeds = validateAndParse(RealTimeDataFeedSchema.class, REAL_TIME_DATA_FEED_SCHEMA, "realtimedatafeeds");
+        val publicTransportFeeds = validateAndParse(PublicTransportFeedSchema.class, PUBLIC_TRANSPORT_FEED_SCHEMA, "pt-static-feeds");
+        val realtimeDataFeeds = validateAndParse(RealTimeDataFeedSchema.class, REAL_TIME_DATA_FEED_SCHEMA, "pt-realtime-feeds");
 
         val validUrlCondition = new Condition<String>(s -> new UrlValidator().isValid(s), "a valid URL");
 
