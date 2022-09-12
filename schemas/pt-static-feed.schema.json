@@ -1,0 +1,128 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://region-registry.skedgo.com/pt-static-feed.schema.json",
+  "title": "Public Transport Data Feed",
+  "description": "Public Transport Data Feed specification.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "Unique identifier for this feed. Recommended format is ISO Country Code + Provider name; for example au-tfnsw. For multi country feeds, recommended format is Continent Code + Provider name; for example eu-flixbus.",
+      "type": "string",
+      "pattern": "^[a-z]{2}-(([a-z]|-|_)+)$"
+    },  
+    "name": {
+      "description": "Human friendly name for this feed.",
+      "type": "string",
+      "minLength": 1
+    },
+    "type": {
+      "description": "Type of this feed.",
+      "enum": ["gtfs", "netex", "txc"],
+      "default": "gtfs"
+    },
+    "source": {
+      "description": "Details about how to get this feed.",
+      "type": "object",
+      "properties": {
+        "url": {
+          "description": "URL where this feed can downloaded.",
+          "type": "string"
+        },
+        "headers": {
+          "description": "HTTP headers to include in order to download this feed.",
+          "type": "object",
+          "additionalProperties": {"type": "string"}
+        },
+        "checkCertificate": {
+          "description": "(Only for HTTPS requests) Whether to check or not the https certificates when downloading this feed.",
+          "type": "boolean",
+          "default": true
+        },
+        "authentication": {
+          "description": "Authentication details.",
+          "type": "object",
+          "properties": {
+            "type": {
+              "description": "Authentication mode type",
+              "enum": [ "header" , "query", "userpass" ]
+            },
+            "description": {
+              "description": "Description of this authentication mode type",
+              "type": "string"
+            }
+          }
+        },
+        "apiInformation": {
+          "description": "Information about the API where this feed is published.",
+          "type": "object",
+          "properties": {
+            "name": {
+              "description": "Name or description of this API",
+              "type": "string"
+            },
+            "url": {
+              "description": "Website of the API",
+              "type": "string"
+            }
+          },
+          "required": [ "name" , "url" ]
+        }
+      }, 
+      "required": [ "url" ]
+    },
+    "dataProvider": {
+      "description": "Data provider details.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the provider",
+          "type": "string"
+        },
+        "url": {
+          "description": "Website of the provider",
+          "type": "string"
+        }
+      },
+      "required": [ "name" , "url" ]
+    },
+    "license": {
+      "description": "License details.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of this license",
+          "type": "string"
+        },
+        "url": {
+          "description": "License's URL",
+          "type": "string"
+        }
+      },
+      "required": [ "name", "url" ]
+    },
+    "realtime": {
+      "description": "Real time feeds associated to this feed. Each item should match with a real-time-feed id.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true,
+      "minItems": 1
+    },
+    "excludedFiles": {
+      "description": "List of the files to exclude when parsing this feed.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "includeOnlyFiles": {
+      "description": "List of the files to include when parsing this feed.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [ "id", "name", "source", "dataProvider" ]
+}

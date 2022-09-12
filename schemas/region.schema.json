@@ -1,0 +1,137 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://region-registry.skedgo.com/region.schema.json",
+  "title": "Region",
+  "description": "Region specification",
+  "type": "object",
+  "properties": {
+    "code": {
+      "description": "Code details for this region.",
+      "type": "object",
+      "properties": {
+        "countryCode": {
+          "description": "A valid ISO 3166-1 alpha-2 code.",
+          "type": "string",
+          "pattern": "^[A-Z]{2}$"
+        },
+        "subdivisionCode": {
+          "description": "A valid ISO 3166-2 code.",
+          "type": "string",
+          "minLength": 1
+        },
+        "cityName": {
+          "description": "Name of City. Main city if this region covers multiple cities.",
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [ "countryCode", "cityName" ]
+    },
+    "timezone": {
+      "description": "A valid id from the IANA time zone database. For more information: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones",
+      "type": "string"
+    },
+    "locale": {
+      "description": "Locale information",
+      "type": "object",
+      "properties": {
+        "language": {
+          "description": "An ISO 639 alpha-2 or alpha-3 language code, or a language subtag up to 8 characters in length.",
+          "type": "string"
+        },
+        "country": {
+          "description": "A valid ISO 3166-1 alpha-2 code.",
+          "type": "string",
+          "pattern": "^[A-Z]{2}$"
+        }
+      },
+      "required": [ "language", "country" ]
+    },
+    "coverage": {
+      "description": "Coverage details.",
+      "type": "object",
+      "properties": {
+        "cities": {
+          "description": "List of cities that this region contains.",
+          "type": "array",
+          "items": { "$ref": "#/$defs/city" },
+          "minItems": 1
+        },
+        "polygon": {
+          "description": "Area that this region covers as a GeoJSON Polygon. Cutouts are not allowed.",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [ "Polygon" ]
+            },
+            "coordinates": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "minItems": 4,
+                "items": {
+                  "type": "array",
+                  "minItems": 2,
+                  "items": {
+                    "type": "number"
+                  }
+                }
+              },
+              "minItems": 1,
+              "maxItems": 1
+            }
+          }
+        }
+      },
+      "required": [ "cities", "polygon" ]
+    },
+    "currency": {
+      "description": "The ISO 4217 currency code of this currency.",
+      "type": "string"
+    }, 
+    "measurementSystem": {
+      "description": "Measurement system to use in this region.",
+      "enum": ["metric", "imperial"],
+      "default": "metric"
+    }, 
+    "trafficRule": {
+      "description": "Traffic side on the road to keep to.",
+      "enum": ["left", "right"]
+    },
+    "feeds": {
+      "description": "Set of public transport feeds for this region. Each item must match with a public transport data feed id.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    }
+  },
+  "required": [ "code", "timezone", "locale", "coverage", "currency" , "trafficRule"],
+  "$defs": {
+    "city": {
+      "type": "object",
+      "properties": {
+        "lat": {
+          "description": "Latitude coordinate in WGS-84 format.",
+          "type": "number",
+          "minimum": -90,
+          "maximum": 90
+        },
+        "lng": {
+          "description": "Longitude coordinate in WGS-84 format.",
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180
+        },
+        "name": {
+          "description": "Name of this city.",
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [ "lat", "lng", "name" ]
+    }
+  }
+}
