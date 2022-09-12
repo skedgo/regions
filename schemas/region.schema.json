@@ -57,8 +57,29 @@
           "minItems": 1
         },
         "polygon": {
-          "description": "Area that this region covers. Cutouts are not allowed.",
-          "$ref": "https://geojson.org/schema/Polygon.json"
+          "description": "Area that this region covers as a GeoJSON Polygon. Cutouts are not allowed.",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [ "Polygon" ]
+            },
+            "coordinates": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "minItems": 4,
+                "items": {
+                  "type": "array",
+                  "minItems": 2,
+                  "items": {
+                    "type": "number"
+                  }
+                }
+              },
+              "minItems": 1,
+              "maxItems": 1
+            }
+          }
         }
       },
       "required": [ "cities", "polygon" ]
