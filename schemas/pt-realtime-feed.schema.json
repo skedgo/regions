@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://region-registry.skedgo.com/real-time-data-feed.schema.json",
+  "$id": "https://region-registry.skedgo.com/pt-realtime-feed.schema.json",
   "title": "Real Time Data Feed",
   "description": "Real Time Data Feed specification",
   "type": "object",
@@ -66,35 +66,55 @@
     }
   },
   "required": [ "id", "name", "source" ],
-  "if": {
-    "properties": {
-      "type": { "const": "gtfs-r" }
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "type": { "const": "gtfs-r" }
+        }
+      },
+      "then": {
+        "properties": {
+          "subtype": {
+            "description": "Message type for this GTFS-R feed.",
+            "type": "array",
+            "items": {
+              "enum": [ "trip-updates", "alerts", "vehicle-positions" ]
+            },
+            "uniqueItems": true
+          }
+        },
+        "required": [ "subtype" ]
+      },
+      "else": {
+        "properties": {
+          "subtype": {
+            "description": "Message type for this SIRI feed.",
+            "type": "array",
+            "items": {
+              "enum": [ "et", "sx", "vm" ]
+            },
+            "uniqueItems": true
+          }
+        },
+        "required": [ "subtype" ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": { "const": "siri" }
+        }
+      },
+      "then": {
+        "properties": {
+          "dataExchangePattern": {
+            "description": "Data Exchange Pattern of Interaction for this SIRI feed.",
+            "enum": [ "request-response", "publish-subscribe" ]
+          }
+        },
+        "required": [ "dataExchangePattern" ]
+      }
     }
-  },
-  "then": {
-    "properties": {
-      "subtype": {
-        "description": "Message type for this GTFS-R feed.",
-        "type": "array",
-        "items": {
-          "enum": [ "trip-updates", "alerts", "vehicle-positions" ]
-        },
-        "uniqueItems": true
-      }
-    },
-    "required": [ "subtype" ]
-  },
-  "else": {
-    "properties": {
-      "subtype": {
-        "description": "Message type for this SIRI feed.",
-        "type": "array",
-        "items": {
-          "enum": [ "et", "sx", "vm" ]
-        },
-        "uniqueItems": true
-      }
-    },
-    "required": [ "subtype" ]
-  }
+  ]
 }
