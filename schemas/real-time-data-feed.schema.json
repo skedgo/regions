@@ -58,6 +58,11 @@
         }
       },
       "required": [ "url" ]
+    },
+    "refreshInterval": {
+      "description": "How frequently this real time feed should be pulled. (In seconds)",
+      "type": "integer",
+      "minimum": 5
     }
   },
   "required": [ "id", "name", "source" ],
