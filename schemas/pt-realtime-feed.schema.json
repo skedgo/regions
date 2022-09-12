@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://region-registry.skedgo.com/real-time-data-feed.schema.json",
+  "$id": "https://region-registry.skedgo.com/pt-realtime-feed.schema.json",
   "title": "Real Time Data Feed",
   "description": "Real Time Data Feed specification",
   "type": "object",
