@@ -48,8 +48,8 @@ class RegionsApplicationTests {
         val factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V7);
         try {
             REGION_SCHEMA = factory.getSchema(Files.newInputStream(Paths.get("schemas/region.schema.json")));
-            PUBLIC_TRANSPORT_FEED_SCHEMA = factory.getSchema(Files.newInputStream(Paths.get("schemas/public-transport-feed.schema.json")));
-            REAL_TIME_DATA_FEED_SCHEMA = factory.getSchema(Files.newInputStream(Paths.get("schemas/real-time-data-feed.schema.json")));
+            PUBLIC_TRANSPORT_FEED_SCHEMA = factory.getSchema(Files.newInputStream(Paths.get("schemas/pt-static-feed.schema.json")));
+            REAL_TIME_DATA_FEED_SCHEMA = factory.getSchema(Files.newInputStream(Paths.get("schemas/pt-realtime-feed.schema.json")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
