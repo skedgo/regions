@@ -1,13 +1,13 @@
 {
   "code": {
-    "countryCode": "ar",
-    "subdivisionCode": "b",
+    "countryCode": "AR",
+    "subdivisionCode": "B",
     "cityName": "Bahia Blanca"
   },
   "timezone": "America/Argentina/Buenos_Aires",
   "locale": {
     "language": "es",
-    "country": "ar"
+    "country": "AR"
   },
   "coverage": {
     "cities": [{

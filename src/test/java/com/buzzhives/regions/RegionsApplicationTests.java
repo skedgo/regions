@@ -39,8 +39,8 @@ class RegionsApplicationTests {
     @NotNull
     private static final JsonSchema REAL_TIME_DATA_FEED_SCHEMA;
 
-    private static final Set<String> ISO_LANGUAGES = Arrays.stream(Locale.getISOLanguages()).map(String::toLowerCase).collect(Collectors.toSet());
-    private static final Set<String> ISO_COUNTRIES = Arrays.stream(Locale.getISOCountries()).map(String::toLowerCase).collect(Collectors.toSet());
+    private static final Set<String> ISO_LANGUAGES = Arrays.stream(Locale.getISOLanguages()).collect(Collectors.toSet());
+    private static final Set<String> ISO_COUNTRIES = Arrays.stream(Locale.getISOCountries()).collect(Collectors.toSet());
     private static final Set<String> ISO_CURRENCIES = Currency.getAvailableCurrencies().stream().map(Currency::getCurrencyCode).collect(Collectors.toSet());
 
 

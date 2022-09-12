@@ -1,13 +1,13 @@
 {
   "code": {
-    "countryCode": "ar",
-    "subdivisionCode": "c",
+    "countryCode": "AR",
+    "subdivisionCode": "C",
     "cityName": "Buenos Aires"
   },
   "timezone": "America/Argentina/Buenos_Aires",
   "locale": {
     "language": "es",
-    "country": "ar"
+    "country": "AR"
   },
   "coverage": {
     "cities": [{
