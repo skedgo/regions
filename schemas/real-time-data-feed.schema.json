@@ -13,8 +13,7 @@
     "name": {
       "description": "Human friendly name for this feed.",
       "type": "string",
-      "minLength": 1,
-      "pattern": "^(([A-Z]|[a-z]|-|_)+)$"
+      "minLength": 1
     },
     "type": {
       "description": "Standard of this feed.",
