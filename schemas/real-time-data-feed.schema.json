@@ -60,5 +60,36 @@
       "required": [ "url" ]
     }
   },
-  "required": [ "id", "name", "source" ]
+  "required": [ "id", "name", "source" ],
+  "if": {
+    "properties": {
+      "type": { "const": "gtfs-r" }
+    }
+  },
+  "then": {
+    "properties": {
+      "subtype": {
+        "description": "Message type for this GTFS-R feed.",
+        "type": "array",
+        "items": {
+          "enum": [ "trip-updates", "alerts", "vehicle-positions" ]
+        },
+        "uniqueItems": true
+      }
+    },
+    "required": [ "subtype" ]
+  },
+  "else": {
+    "properties": {
+      "subtype": {
+        "description": "Message type for this SIRI feed.",
+        "type": "array",
+        "items": {
+          "enum": [ "et", "sx", "vm" ]
+        },
+        "uniqueItems": true
+      }
+    },
+    "required": [ "subtype" ]
+  }
 }
