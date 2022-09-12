@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.buzzhives</groupId>
-    <artifactId>regions</artifactId>
+    <artifactId>validator</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>regions</name>
-    <description>regions</description>
+    <name>validator</name>
+    <description>validator</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>
@@ -76,7 +76,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <sourceDirectory>${basedir}/schemas</sourceDirectory>
+                    <sourceDirectory>${basedir}/../../schemas</sourceDirectory>
                     <targetPackage>com.buzzhives.model</targetPackage>
                 </configuration>
             </plugin>

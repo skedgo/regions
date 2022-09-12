@@ -1,13 +1,13 @@
-package com.buzzhives.regions;
+package com.buzzhives.validator;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class RegionsApplication {
+public class ValidatorApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(RegionsApplication.class, args);
+        SpringApplication.run(ValidatorApplication.class, args);
     }
 
 }

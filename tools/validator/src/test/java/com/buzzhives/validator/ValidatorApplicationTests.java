@@ -1,8 +1,9 @@
-package com.buzzhives.regions;
+package com.buzzhives.validator;
+
 
 import com.buzzhives.model.Code;
-import com.buzzhives.model.PublicTransportFeedSchema;
-import com.buzzhives.model.RealTimeDataFeedSchema;
+import com.buzzhives.model.PtRealtimeFeedSchema;
+import com.buzzhives.model.PtStaticFeedSchema;
 import com.buzzhives.model.RegionSchema;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.networknt.schema.JsonSchema;
@@ -18,7 +19,6 @@ import org.assertj.core.api.Condition;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -28,7 +28,22 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @CommonsLog
-class RegionsApplicationTests {
+class ValidatorApplicationTests {
+
+    @NotNull
+    private static final String BASE_DIR = "../../";
+
+    @NotNull
+    private static final String SCHEMAS_DIR = BASE_DIR + "schemas/";
+
+    @NotNull
+    private static final String REGIONS_DIR = BASE_DIR + "regions/";
+
+    @NotNull
+    private static final String PT_STATIC_FEEDS_DIR = BASE_DIR + "pt-static-feeds/";
+
+    @NotNull
+    private static final String PT_REALTIME_FEEDS_DIR = BASE_DIR + "pt-realtime-feeds/";
 
     @NotNull
     private static final JsonSchema REGION_SCHEMA;
@@ -47,28 +62,12 @@ class RegionsApplicationTests {
     static {
         val factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V7);
         try {
-            REGION_SCHEMA = factory.getSchema(Files.newInputStream(Paths.get("schemas/region.schema.json")));
-            PUBLIC_TRANSPORT_FEED_SCHEMA = factory.getSchema(Files.newInputStream(Paths.get("schemas/pt-static-feed.schema.json")));
-            REAL_TIME_DATA_FEED_SCHEMA = factory.getSchema(Files.newInputStream(Paths.get("schemas/pt-realtime-feed.schema.json")));
+            REGION_SCHEMA = factory.getSchema(Files.newInputStream(Paths.get(SCHEMAS_DIR + "region.schema.json")));
+            PUBLIC_TRANSPORT_FEED_SCHEMA = factory.getSchema(Files.newInputStream(Paths.get(SCHEMAS_DIR + "pt-static-feed.schema.json")));
+            REAL_TIME_DATA_FEED_SCHEMA = factory.getSchema(Files.newInputStream(Paths.get(SCHEMAS_DIR + "pt-realtime-feed.schema.json")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    @Test
-    void singleRegionTest() throws IOException {
-        val jsonNode = new ObjectMapper().readTree(new File("regions/ar_b_bahiablanca.json"));
-        val errors = REGION_SCHEMA.validate(jsonNode);
-        Assertions.assertThat(errors).isEmpty();
-        log.info(" no errors found. ");
-    }
-
-    @Test
-    void singlePublicTransportDataFeedTest() throws IOException {
-        val jsonNode = new ObjectMapper().readTree(new File("pt-static-feeds/ar-sapem.json"));
-        val errors = PUBLIC_TRANSPORT_FEED_SCHEMA.validate(jsonNode);
-        Assertions.assertThat(errors).isEmpty();
-        log.info(" no errors found. ");
     }
 
     private static Set<ValidationMessage> validateJson(@NotNull Path path, @NotNull JsonSchema schema) throws IOException {
@@ -94,14 +93,14 @@ class RegionsApplicationTests {
     void validate() throws IOException {
 
 
-        val regions = validateAndParse(RegionSchema.class, REGION_SCHEMA, "regions");
-        val publicTransportFeeds = validateAndParse(PublicTransportFeedSchema.class, PUBLIC_TRANSPORT_FEED_SCHEMA, "pt-static-feeds");
-        val realtimeDataFeeds = validateAndParse(RealTimeDataFeedSchema.class, REAL_TIME_DATA_FEED_SCHEMA, "pt-realtime-feeds");
+        val regions = validateAndParse(RegionSchema.class, REGION_SCHEMA, REGIONS_DIR);
+        val publicTransportFeeds = validateAndParse(PtStaticFeedSchema.class, PUBLIC_TRANSPORT_FEED_SCHEMA, PT_STATIC_FEEDS_DIR);
+        val realtimeDataFeeds = validateAndParse(PtRealtimeFeedSchema.class, REAL_TIME_DATA_FEED_SCHEMA, PT_REALTIME_FEEDS_DIR);
 
         val validUrlCondition = new Condition<String>(s -> new UrlValidator().isValid(s), "a valid URL");
 
 
-        val realtimeDataFeedsMap = new HashMap<String, RealTimeDataFeedSchema>();
+        val realtimeDataFeedsMap = new HashMap<String, PtRealtimeFeedSchema>();
         for (val realtimeDataFeed : realtimeDataFeeds) {
             val id = realtimeDataFeed.getId();
             Assertions.assertThat(id).isNotIn(realtimeDataFeedsMap.keySet());
@@ -110,7 +109,7 @@ class RegionsApplicationTests {
         }
 
 
-        val publicTransportFeedsMap = new HashMap<String, PublicTransportFeedSchema>();
+        val publicTransportFeedsMap = new HashMap<String, PtStaticFeedSchema>();
 
         for (val publicTransportFeed : publicTransportFeeds) {
             Assertions.assertThat(publicTransportFeed.getId()).isNotIn(publicTransportFeedsMap.keySet());
@@ -146,5 +145,4 @@ class RegionsApplicationTests {
                 Assertions.assertThat(publicTransportFeedsMap).containsKeys(publicTransportFeedRefs.toArray(new String[0]));
         }
     }
-
 }
