@@ -2,6 +2,8 @@
   "id": "ar-babusrt",
   "name": "colectivos-r",
   "source": {
-    "url": "https://apitransporte.buenosaires.gob.ar/colectivos?client_id=d3d3c80dc41a40dbb13dc2654c9e01ca&client_secret=048bcD1A07DD4F32BdF0AdC5D46456af"
-  }
+    "url": "https://apitransporte.buenosaires.gob.ar/colectivos/vehiclePositions?client_id=d3d3c80dc41a40dbb13dc2654c9e01ca&client_secret=048bcD1A07DD4F32BdF0AdC5D46456af"
+  },
+  "type": "gtfs-r",
+  "subtype": ["vehicle-positions"]
 }
