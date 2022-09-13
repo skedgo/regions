@@ -13,7 +13,6 @@ import com.networknt.schema.ValidationMessage;
 import lombok.Cleanup;
 import lombok.extern.apachecommons.CommonsLog;
 import lombok.val;
-import org.apache.commons.validator.routines.UrlValidator;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.Condition;
 import org.geotools.geojson.geom.GeometryJSON;
@@ -25,6 +24,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -103,7 +103,7 @@ class ValidatorApplicationTests {
         val publicTransportFeeds = validateAndParse(PtStaticFeedSchema.class, PUBLIC_TRANSPORT_FEED_SCHEMA, PT_STATIC_FEEDS_DIR);
         val realtimeDataFeeds = validateAndParse(PtRealtimeFeedSchema.class, REAL_TIME_DATA_FEED_SCHEMA, PT_REALTIME_FEEDS_DIR);
 
-        val validUrlCondition = new Condition<String>(s -> new UrlValidator().isValid(s), "a valid URL");
+        val validUrlCondition = new Condition<>(ValidatorApplicationTests::isUrlValid, "a valid URL");
 
 
         log.info("verifying pt-realtime-feeds...");
@@ -175,4 +175,14 @@ class ValidatorApplicationTests {
         regionName.append(", ").append(code.getCountryCode());
         return regionName.toString();
     }
+
+    public static boolean isUrlValid(String url) {
+        try {
+            new URL(url).toURI();
+            return true;
+        } catch (Exception exception) {
+            return false;
+        }
+    }
+
 }
