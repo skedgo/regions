@@ -18,6 +18,7 @@ import org.assertj.core.api.Assertions;
 import org.assertj.core.api.Condition;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -28,6 +29,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @CommonsLog
+@SpringBootTest
 class ValidatorApplicationTests {
 
     @NotNull
@@ -144,5 +146,7 @@ class ValidatorApplicationTests {
             if (publicTransportFeedRefs != null && !publicTransportFeedRefs.isEmpty())
                 Assertions.assertThat(publicTransportFeedsMap).containsKeys(publicTransportFeedRefs.toArray(new String[0]));
         }
+
+        log.info("no errors detected");
     }
 }
