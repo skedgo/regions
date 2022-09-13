@@ -11,8 +11,8 @@
   },
   "coverage": {
     "cities": [{
-      "lat": 0,
-      "lng": 0,
+      "lat": 39.652802,
+      "lng": -106.340538,
       "name": "Vail"
     }],
     "polygon": {
