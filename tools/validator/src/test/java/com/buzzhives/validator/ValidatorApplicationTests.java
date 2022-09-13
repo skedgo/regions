@@ -95,6 +95,23 @@ class ValidatorApplicationTests {
         return set;
     }
 
+    @NotNull
+    private static String getRegionName(@NotNull Code code) {
+        val regionName = new StringBuilder(code.getCityName());
+        Optional.ofNullable(code.getSubdivisionCode()).filter(sc -> !sc.isEmpty()).map(sc -> regionName.append(", ").append(sc));
+        regionName.append(", ").append(code.getCountryCode());
+        return regionName.toString();
+    }
+
+    public static boolean isUrlValid(String url) {
+        try {
+            new URL(url).toURI();
+            return true;
+        } catch (Exception exception) {
+            return false;
+        }
+    }
+
     @Test
     void validate() throws IOException {
 
@@ -166,23 +183,6 @@ class ValidatorApplicationTests {
         }
 
         log.info("no errors detected");
-    }
-
-    @NotNull
-    private static String getRegionName(@NotNull Code code) {
-        val regionName = new StringBuilder(code.getCityName());
-        Optional.ofNullable(code.getSubdivisionCode()).filter(sc -> !sc.isEmpty()).map(sc -> regionName.append(", ").append(sc));
-        regionName.append(", ").append(code.getCountryCode());
-        return regionName.toString();
-    }
-
-    public static boolean isUrlValid(String url) {
-        try {
-            new URL(url).toURI();
-            return true;
-        } catch (Exception exception) {
-            return false;
-        }
     }
 
 }
