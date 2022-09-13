@@ -1,0 +1,14 @@
+{
+  "id": "us-vailtransit",
+  "name": "Vail Transit",
+  "type": "gtfs",
+  "source": {
+    "url": "https://data.trilliumtransit.com/gtfs/vailtransit-co-us/vailtransit-co-us.zip"
+  },
+  "dataProvider": {
+    "name": "Trillium Solutions, Inc. ",
+    "url": "http://www.trilliumtransit.com/"
+  }
+
+
+}
