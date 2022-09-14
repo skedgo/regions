@@ -9,7 +9,9 @@ jobs:
     name: Test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
       - name: validate json files.
         id: json-validation
         working-directory: /home/runner/work/regions/tools/validator
