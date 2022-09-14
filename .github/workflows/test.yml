@@ -1,0 +1,22 @@
+name: Test on PR
+
+on:
+  pull_request:
+    synchronize:
+
+jobs:
+  nginx:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get git commit short tag
+        uses: benjlevesque/short-sha@v1.2
+        id: shortSha
+        with:
+          length: 7
+      - name: Get current date for test
+        id: dateTag
+        run: echo "::set-output name=date::$(date +'%Y%m%d')"
+      - name: validate json files.
+        id: json-validation
+        run: ./tools/validator/mvnw test
