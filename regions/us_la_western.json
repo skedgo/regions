@@ -1,0 +1,60 @@
+{
+  "code": {
+    "countryCode": "US",
+    "subdivisionCode": "LA",
+      "cityName": "Shreveport"
+  },
+  "timezone": "America/New_York",
+  "locale": {
+    "language": "en",
+    "country": "US"
+  },
+  "coverage": {
+    "cities": [
+      {
+      "lat": 32.469508,
+      "lng": -93.756637,
+      "name": "Shreveport"
+      },
+      {
+        "lat": 32.037184,
+        "lng": 93.714752,
+        "name": "Mansfield"
+      },
+      {
+        "lat":  32.868053,
+        "lng": -93.986663,
+        "name": "Vivian"
+      }
+    ],
+    "polygon": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            -94.04296874999999,
+            31.99875937194732
+          ],
+          [
+            -93.57330322265625,
+            31.18930843952816
+          ],
+          [
+            -93.61862182617188,
+            33.02133046690858
+          ],
+          [
+            -94.04522216796875,
+            33.02133046690858
+          ],
+          [
+            -94.04296874999999,
+            31.99875937194732
+          ]
+        ]
+      ]
+    }},
+  "currency": "USD",
+  "trafficRule": "right",
+  "feeds": [ "us-sportran" ]
+}
