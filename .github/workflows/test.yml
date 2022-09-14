@@ -17,3 +17,6 @@ jobs:
       - name: Get current date for test
         id: dateTag
         run: echo "::set-output name=date::$(date +'%Y%m%d')"
+      - name: validate json files.
+        id: json-validation
+        run: ./tools/validator/mvnw test
