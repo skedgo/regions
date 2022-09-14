@@ -14,7 +14,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
       - name: list
         run: ls -la
-#      - name: validate json files.
-#        id: json-validation
-#        working-directory: /home/runner/work/regions/tools/validator
-#        run: ./mvnw test
+      - name: validate json files.
+        id: json-validation
+        working-directory: ./tools/validator
+        run: ls -la
