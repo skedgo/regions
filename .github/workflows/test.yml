@@ -14,6 +14,6 @@ jobs:
         id: shortSha
         with:
           length: 7
-      - name: Get current date
+      - name: Get current date for test
         id: dateTag
         run: echo "::set-output name=date::$(date +'%Y%m%d')"
