@@ -19,5 +19,5 @@ jobs:
         run: echo "::set-output name=date::$(date +'%Y%m%d')"
       - name: validate json files.
         id: json-validation
-        working-directory: tools/validator
+        working-directory: ../tools/validator
         run: ./mvnw test
