@@ -17,4 +17,4 @@ jobs:
       - name: validate json files.
         id: json-validation
         working-directory: ./tools/validator
-        run: ls -la
+        run: mvn test
