@@ -13,7 +13,7 @@ jobs:
 #        TODO: remove this ref when this is merged into main. 
         with:
           ref: ${{ github.event.pull_request.head.sha }}
-      - name: validate json files.
-        id: json-validation
+      - name: json validator
+        id: json-validator
         working-directory: ./tools/validator
-        run: mvn test
+        run: mvn test --quiet
