@@ -13,10 +13,6 @@ jobs:
 #        TODO: remove this ref when this is merged into main. 
         with:
           ref: ${{ github.event.pull_request.head.sha }}
-      - name: source generation
-        id: source-generation
-        working-directory: ./tools/validator
-        run: mvn clean generate-sources --no-transfer-progress
       - name: json validator
         id: json-validator
         working-directory: ./tools/validator
