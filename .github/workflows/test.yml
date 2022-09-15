@@ -16,4 +16,4 @@ jobs:
       - name: json validator
         id: json-validator
         working-directory: ./tools/validator
-        run: mvn test --no-transfer-progress
+        run: mvn test --quiet --no-transfer-progress
