@@ -76,7 +76,6 @@
   "trafficRule": "right",
   "feeds": [
     "us-greaterportlandmetro",
-    "us-southportlandbus",
-    "us-bsoob"
+    "us-southportlandbus"
   ]
 }
