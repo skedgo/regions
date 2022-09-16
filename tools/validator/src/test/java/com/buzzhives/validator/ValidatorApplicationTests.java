@@ -88,11 +88,28 @@ class ValidatorApplicationTests {
         val set = new HashSet<T>();
         @Cleanup val regionFiles = Files.list(Paths.get(directoryPath));
         for (val path : regionFiles.collect(Collectors.toSet())) {
-            log.info("Validating " + path.toString());
+            log.info("validating " + path.toString());
             Assertions.assertThat(validateJson(path, schema)).isEmpty();
-            set.add(new ObjectMapper().readValue(path.toFile(), klass));
+            val entity = new ObjectMapper().readValue(path.toFile(), klass);
+            Assertions.assertThat(path.getFileName().toString()).isEqualTo(getCorrectFileName(entity));
+            set.add(entity);
         }
         return set;
+    }
+
+    @NotNull
+    private static String getCorrectFileName(@NotNull Object entity) {
+        val fileName = new StringBuilder();
+        if (entity instanceof RegionSchema) {
+            val code = ((RegionSchema) entity).getCode();
+            fileName.append(code.getCountryCode());
+            Optional.ofNullable(code.getSubdivisionCode()).filter(sc -> !sc.isEmpty()).map(sc -> fileName.append("-").append(sc));
+            fileName.append("-").append(code.getCityName().replaceAll("\\s", ""));
+        } else if (entity instanceof PtStaticFeedSchema)
+            fileName.append(((PtStaticFeedSchema) entity).getId());
+        else if (entity instanceof PtRealtimeFeedSchema)
+            fileName.append(((PtRealtimeFeedSchema) entity).getId());
+        return fileName.append(".json").toString().toLowerCase();
     }
 
     @NotNull

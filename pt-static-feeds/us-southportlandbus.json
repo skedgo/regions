@@ -1,0 +1,12 @@
+{
+  "id": "us-southportlandbus",
+  "name": "South Portland Bus",
+  "type": "gtfs",
+  "source": {
+    "url": "http://www.smttracker.com/downloads/gtfs/south-portland-me-us.zip"
+  },
+  "dataProvider": {
+    "name": "City of South Portland",
+    "url": "https://www.southportland.org/departments/bus-transportation/"
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "code": {
+    "countryCode": "US",
+    "subdivisionCode": "ME",
+    "cityName": "Portland"
+  },
+  "timezone": "America/New_York",
+  "locale": {
+    "language": "en",
+    "country": "US"
+  },
+  "coverage": {
+    "cities": [
+      {
+        "lat":  43.658930,
+        "lng": -70.272674,
+        "name": "Portland"
+      },
+      {
+        "lat":  43.493031,
+        "lng": -70.455665,
+        "name": "Biddeford"
+      },
+      {
+        "lat":  43.152099,
+        "lng": -70.649471,
+        "name": "York"
+      },
+      {
+        "lat":  43.675445,
+        "lng": -70.368289,
+        "name": "Westbrook"
+      }
+    ],
+    "polygon": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            -70.97991943359375,
+            43.33416828298583
+          ],
+          [
+            -70.82473754882812,
+            43.224191874050916
+          ],
+          [
+            -70.83572387695312,
+            43.12604547425635
+          ],
+          [
+            -70.60020446777344,
+            42.96295514212548
+          ],
+          [
+            -69.68353271484375,
+            43.81471121600004
+          ],
+          [
+            -69.81536865234375,
+            43.97898113341921
+          ],
+          [
+            -71.0101318359375,
+            43.982933852960805
+          ],
+          [
+            -70.97991943359375,
+            43.33416828298583
+          ]
+        ]
+      ]
+    }
+  },
+  "currency": "USD",
+  "trafficRule": "right",
+  "feeds": [
+    "us-greaterportlandmetro",
+    "us-southportlandbus"
+  ]
+}
