@@ -13,14 +13,18 @@ import com.networknt.schema.ValidationMessage;
 import lombok.Cleanup;
 import lombok.extern.apachecommons.CommonsLog;
 import lombok.val;
-import org.apache.commons.validator.routines.UrlValidator;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.Condition;
+import org.geotools.geojson.geom.GeometryJSON;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.GeometryFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -91,6 +95,23 @@ class ValidatorApplicationTests {
         return set;
     }
 
+    @NotNull
+    private static String getRegionName(@NotNull Code code) {
+        val regionName = new StringBuilder(code.getCityName());
+        Optional.ofNullable(code.getSubdivisionCode()).filter(sc -> !sc.isEmpty()).map(sc -> regionName.append(", ").append(sc));
+        regionName.append(", ").append(code.getCountryCode());
+        return regionName.toString();
+    }
+
+    public static boolean isUrlValid(String url) {
+        try {
+            new URL(url).toURI();
+            return true;
+        } catch (Exception exception) {
+            return false;
+        }
+    }
+
     @Test
     void validate() throws IOException {
 
@@ -99,9 +120,10 @@ class ValidatorApplicationTests {
         val publicTransportFeeds = validateAndParse(PtStaticFeedSchema.class, PUBLIC_TRANSPORT_FEED_SCHEMA, PT_STATIC_FEEDS_DIR);
         val realtimeDataFeeds = validateAndParse(PtRealtimeFeedSchema.class, REAL_TIME_DATA_FEED_SCHEMA, PT_REALTIME_FEEDS_DIR);
 
-        val validUrlCondition = new Condition<String>(s -> new UrlValidator().isValid(s), "a valid URL");
+        val validUrlCondition = new Condition<>(ValidatorApplicationTests::isUrlValid, "a valid URL");
 
 
+        log.info("verifying pt-realtime-feeds...");
         val realtimeDataFeedsMap = new HashMap<String, PtRealtimeFeedSchema>();
         for (val realtimeDataFeed : realtimeDataFeeds) {
             val id = realtimeDataFeed.getId();
@@ -110,9 +132,8 @@ class ValidatorApplicationTests {
             Assertions.assertThat(realtimeDataFeed.getSource().getUrl()).is(validUrlCondition);
         }
 
-
+        log.info("verifying pt-static-feeds...");
         val publicTransportFeedsMap = new HashMap<String, PtStaticFeedSchema>();
-
         for (val publicTransportFeed : publicTransportFeeds) {
             Assertions.assertThat(publicTransportFeed.getId()).isNotIn(publicTransportFeedsMap.keySet());
             publicTransportFeedsMap.put(publicTransportFeed.getId(), publicTransportFeed);
@@ -127,12 +148,17 @@ class ValidatorApplicationTests {
                 Assertions.assertThat(realtimeDataFeedsMap).containsKeys(realtime.toArray(new String[0]));
         }
 
-
+        log.info("verifying regions...");
+        val gf = new GeometryFactory();
+        val geometryJSON = new GeometryJSON();
+        val mapper = new ObjectMapper();
         val regionCodes = new HashSet<Code>();
         for (val region : regions) {
             //check the code of the regions and its uniqueness
             val code = region.getCode();
-            Assertions.assertThat(code).as("duplicated region code: " + code.toString()).isNotIn(regionCodes);
+            val regionName = getRegionName(code);
+            log.info("verifying region " + regionName);
+            Assertions.assertThat(code).as("duplicated region code: " + code).isNotIn(regionCodes);
             regionCodes.add(code);
             Assertions.assertThat(code.getCountryCode()).isIn(ISO_COUNTRIES);
             val locale = region.getLocale();
@@ -140,6 +166,15 @@ class ValidatorApplicationTests {
             Assertions.assertThat(locale.getLanguage()).isIn(ISO_LANGUAGES);
             Assertions.assertThat(region.getCurrency()).isIn(ISO_CURRENCIES);
             Assertions.assertThat(region.getTimezone()).isIn(ZoneId.getAvailableZoneIds());
+
+            @Cleanup val polygonStream = new ByteArrayInputStream(mapper.writeValueAsString(region.getCoverage().getPolygon()).getBytes());
+            val polygon = geometryJSON.readPolygon(polygonStream);
+
+            //check that all cities are contained in the polygon.
+            for (val city : region.getCoverage().getCities())
+                Assertions.assertThat(polygon.contains(gf.createPoint(new Coordinate(city.getLng(), city.getLat()))))
+                        .withFailMessage(String.format("City %s is not contained in %s polygon.", city.getName(), regionName))
+                        .isTrue();
 
             //check that all regions have a valid and existent feed
             val publicTransportFeedRefs = region.getFeeds();
@@ -149,4 +184,5 @@ class ValidatorApplicationTests {
 
         log.info("no errors detected");
     }
+
 }
