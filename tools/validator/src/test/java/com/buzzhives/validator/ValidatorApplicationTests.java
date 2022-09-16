@@ -88,7 +88,7 @@ class ValidatorApplicationTests {
         val set = new HashSet<T>();
         @Cleanup val regionFiles = Files.list(Paths.get(directoryPath));
         for (val path : regionFiles.collect(Collectors.toSet())) {
-            log.info("Validating " + path.toString());
+            log.info("validating " + path.toString());
             Assertions.assertThat(validateJson(path, schema)).isEmpty();
             set.add(new ObjectMapper().readValue(path.toFile(), klass));
         }
