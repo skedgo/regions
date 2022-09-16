@@ -11,8 +11,8 @@
   },
   "coverage": {
     "cities": [{
-      "lat": 0,
-      "lng": 0,
+      "lat": -38.7194,
+      "lng": -62.2686,
       "name": "Bahia Blanca"
     }],
     "polygon": {
