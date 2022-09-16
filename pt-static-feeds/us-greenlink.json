@@ -3,7 +3,7 @@
   "name": "Greenlink",
   "type": "gtfs",
   "source": {
-    "url": "https://trackgreenlink.com/gtfs "
+    "url": "https://trackgreenlink.com/gtfs"
   },
   "dataProvider": {
     "name": "Greenlink",
