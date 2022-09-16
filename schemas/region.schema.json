@@ -22,7 +22,8 @@
         "cityName": {
           "description": "Name of City. Main city if this region covers multiple cities.",
           "type": "string",
-          "minLength": 1
+          "minLength": 1,
+          "pattern": "^[A-Z]([aA-zZ]|\\s)*$"
         }
       },
       "required": [ "countryCode", "cityName" ]
