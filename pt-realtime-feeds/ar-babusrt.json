@@ -1,0 +1,13 @@
+{
+  "id": "ar-babusrt",
+  "name": "colectivos-r",
+  "source": {
+    "url": "https://apitransporte.buenosaires.gob.ar/colectivos/vehiclePositions",
+    "authentication": {
+      "type": "query",
+      "description": "client_id and client_secret query parameters must be provided."
+    }
+  },
+  "type": "gtfs-r",
+  "subtype": ["vehicle-positions"]
+}

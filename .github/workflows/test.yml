@@ -1,0 +1,19 @@
+name: Test on PR
+
+on:
+  pull_request:
+    synchronize:
+
+jobs:
+  nginx:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+#        TODO: remove this ref when this is merged into main. 
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: json validator
+        id: json-validator
+        working-directory: ./tools/validator
+        run: mvn test --quiet

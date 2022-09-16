@@ -1,0 +1,12 @@
+{
+  "id": "ar-sapem",
+  "name": "Sapem",
+  "type": "gtfs",
+  "source": {
+    "url": "https://dev.buzzhives.com/regions/publicData/Uploads/AR_B_BahiaBlanca/SAPEM.zip"
+  },
+  "dataProvider": {
+    "name": "SAPEM",
+    "url": "https://bahiatransporte.com.ar/"
+  }
+}
