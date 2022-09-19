@@ -1,0 +1,12 @@
+{
+  "id": "us-sportran",
+  "name": "Sportran",
+  "type": "gtfs",
+  "source": {
+    "url": "http://sportranbus.com/gtfs"
+  },
+  "dataProvider": {
+    "name": "Sportran",
+    "url": "https://sportranbus.com/"
+  }
+}

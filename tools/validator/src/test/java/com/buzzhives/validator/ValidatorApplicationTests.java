@@ -21,11 +21,14 @@ import org.junit.jupiter.api.Test;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.springframework.boot.test.context.SpringBootTest;
+import us.dustinj.timezonemap.TimeZone;
+import us.dustinj.timezonemap.TimeZoneMap;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.ZoneId;
@@ -86,14 +89,16 @@ class ValidatorApplicationTests {
                                                @NotNull JsonSchema schema,
                                                @NotNull String directoryPath) throws IOException {
         val set = new HashSet<T>();
-        @Cleanup val regionFiles = Files.list(Paths.get(directoryPath));
-        for (val path : regionFiles.collect(Collectors.toSet())) {
-            log.info("validating " + path.toString());
-            Assertions.assertThat(validateJson(path, schema)).isEmpty();
-            val entity = new ObjectMapper().readValue(path.toFile(), klass);
-            Assertions.assertThat(path.getFileName().toString()).isEqualTo(getCorrectFileName(entity));
-            set.add(entity);
-        }
+        try {
+            @Cleanup val regionFiles = Files.list(Paths.get(directoryPath));
+            for (val path : regionFiles.collect(Collectors.toSet())) {
+                log.info("validating " + path.toString());
+                Assertions.assertThat(validateJson(path, schema)).isEmpty();
+                val entity = new ObjectMapper().readValue(path.toFile(), klass);
+                Assertions.assertThat(path.getFileName().toString()).isEqualTo(getCorrectFileName(entity));
+                set.add(entity);
+            }
+        } catch (NoSuchFileException ignored) { }
         return set;
     }
 
@@ -132,6 +137,7 @@ class ValidatorApplicationTests {
     @Test
     void validate() throws IOException {
 
+        val timeZoneMap = TimeZoneMap.forEverywhere();
 
         val regions = validateAndParse(RegionSchema.class, REGION_SCHEMA, REGIONS_DIR);
         val publicTransportFeeds = validateAndParse(PtStaticFeedSchema.class, PUBLIC_TRANSPORT_FEED_SCHEMA, PT_STATIC_FEEDS_DIR);
@@ -188,11 +194,18 @@ class ValidatorApplicationTests {
             val polygon = geometryJSON.readPolygon(polygonStream);
 
             //check that all cities are contained in the polygon.
-            for (val city : region.getCoverage().getCities())
+            for (val city : region.getCoverage().getCities()) {
+                val timeZones = timeZoneMap.getOverlappingTimeZones(city.getLat(), city.getLng());
+                Assertions.assertThat(timeZones).isNotNull();
+                Assertions.assertThat(timeZones).isNotEmpty();
+                val timeZoneIds = timeZones.stream()
+                        .map(TimeZone::getZoneId)
+                        .collect(Collectors.toSet());
+                Assertions.assertThat(region.getTimezone()).isIn(timeZoneIds);
                 Assertions.assertThat(polygon.contains(gf.createPoint(new Coordinate(city.getLng(), city.getLat()))))
                         .withFailMessage(String.format("City %s is not contained in %s polygon.", city.getName(), regionName))
                         .isTrue();
-
+            }
             //check that all regions have a valid and existent feed
             val publicTransportFeedRefs = region.getFeeds();
             if (publicTransportFeedRefs != null && !publicTransportFeedRefs.isEmpty())
