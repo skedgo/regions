@@ -1,0 +1,12 @@
+{
+  "id": "us-greaterportlandmetro",
+  "name": "Greater Portland Metro",
+  "type": "gtfs",
+  "source": {
+    "url": "http://smttracker.com/downloads/gtfs/greater-portland-me.zip."
+  },
+  "dataProvider": {
+    "name": "Greater Portland Metro",
+    "url": "https://gpmetro.org/"
+  }
+}
