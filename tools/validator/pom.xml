@@ -57,6 +57,12 @@
             <artifactId>gt-geojson</artifactId>
             <version>27.1</version>
         </dependency>
+
+        <dependency>
+            <groupId>us.dustinj.timezonemap</groupId>
+            <artifactId>timezonemap</artifactId>
+            <version>4.5</version>
+        </dependency>
     </dependencies>
 
     <build>
