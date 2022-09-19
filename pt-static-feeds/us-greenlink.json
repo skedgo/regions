@@ -1,0 +1,12 @@
+{
+  "id": "us-greenlink",
+  "name": "Greenlink",
+  "type": "gtfs",
+  "source": {
+    "url": "https://trackgreenlink.com/gtfs"
+  },
+  "dataProvider": {
+    "name": "Greenlink",
+    "url": "https://trackgreenlink.com/"
+  }
+}
