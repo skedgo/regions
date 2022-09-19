@@ -26,6 +26,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.ZoneId;
@@ -86,14 +87,16 @@ class ValidatorApplicationTests {
                                                @NotNull JsonSchema schema,
                                                @NotNull String directoryPath) throws IOException {
         val set = new HashSet<T>();
-        @Cleanup val regionFiles = Files.list(Paths.get(directoryPath));
-        for (val path : regionFiles.collect(Collectors.toSet())) {
-            log.info("validating " + path.toString());
-            Assertions.assertThat(validateJson(path, schema)).isEmpty();
-            val entity = new ObjectMapper().readValue(path.toFile(), klass);
-            Assertions.assertThat(path.getFileName().toString()).isEqualTo(getCorrectFileName(entity));
-            set.add(entity);
-        }
+        try {
+            @Cleanup val regionFiles = Files.list(Paths.get(directoryPath));
+            for (val path : regionFiles.collect(Collectors.toSet())) {
+                log.info("validating " + path.toString());
+                Assertions.assertThat(validateJson(path, schema)).isEmpty();
+                val entity = new ObjectMapper().readValue(path.toFile(), klass);
+                Assertions.assertThat(path.getFileName().toString()).isEqualTo(getCorrectFileName(entity));
+                set.add(entity);
+            }
+        } catch (NoSuchFileException ignored) { }
         return set;
     }
 
