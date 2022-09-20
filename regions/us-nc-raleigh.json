@@ -1,0 +1,85 @@
+{
+  "code": {
+    "countryCode": "US",
+    "subdivisionCode": "NC",
+    "cityName": "Raleigh"
+  },
+  "timezone": "America/New_York",
+  "locale": {
+    "language": "en",
+    "country": "US"
+  },
+  "coverage": {
+    "cities": [
+      {
+      "lat": 35.77771427205079,
+      "lng": -78.63739013671874,
+      "name": "Raleigh"
+      },
+      {
+        "lat": 35.78718388978009,
+        "lng": -78.78158569335938,
+        "name": "Cary"
+      },
+      {
+        "lat": 35.78718388978009,
+        "lng": -78.78158569335938,
+        "name": "Chapel Hill"
+      },
+      {
+        "lat": 36.07518723980868,
+        "lng": -79.09744262695311,
+        "name": "Hillsborough"
+      },
+      {
+        "lat": 36.06686213257888,
+        "lng": -79.81292724609375,
+        "name": "Greensboro"
+      },
+      {
+        "lat": 36.09571873655538,
+        "lng": -80.23590087890624,
+        "name": "Winston-Salem"
+      },
+      {
+        "lat": 35.483038134069574,
+        "lng": -80.6231689453125,
+        "name": "Kannapolis"
+      },
+      {
+        "lat": 35.408639881747206,
+        "lng": -80.57991027832031,
+        "name": "Concord"
+      }
+    ],
+    "polygon": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            -80.73165893554688,
+            35.332492391101965
+          ],
+          [
+            -78.233642578125,
+            35.332492391101965
+          ],
+          [
+            -78.233642578125,
+            36.59127365634205
+          ],
+          [
+            -80.73165893554688,
+            36.59127365634205
+          ],
+          [
+            -80.73165893554688,
+            35.332492391101965
+          ]
+        ]
+      ]
+    }},
+  "currency": "USD",
+  "trafficRule": "right",
+  "feeds": [ "us-gocary", "us-godurham", "us-gotriangle", "us-ridertransit",  "us-part" ]
+}

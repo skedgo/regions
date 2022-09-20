@@ -1,0 +1,12 @@
+{
+  "id": "us-ridertransit",
+  "name": "Rider Transit",
+  "type": "gtfs",
+  "source": {
+    "url": "https://data.trilliumtransit.com/gtfs/ckrider-nc-us/ckrider-nc-us.zip"
+  },
+  "dataProvider": {
+    "name": "Rider Transit",
+    "url": "https://ckrider.com/"
+  }
+}
