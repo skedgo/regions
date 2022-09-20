@@ -1,0 +1,63 @@
+{
+  "code": {
+    "countryCode": "US",
+    "subdivisionCode": "CO",
+    "cityName": "Vail"
+  },
+  "timezone": "America/Denver",
+  "locale": {
+    "language": "en",
+    "country": "US"
+  },
+  "coverage": {
+    "cities": [
+      {
+        "lat": 39.643304,
+        "lng": -106.387653,
+        "name": "Vail"
+      },
+      {
+        "lat": 39.637025874075576,
+        "lng": -106.06269836425781,
+        "name": "Silverthorne"
+      },
+      {
+        "lat": 39.57486555724486,
+        "lng": -106.09874725341797,
+        "name": "Frisco"
+      }
+    ],
+    "polygon": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            -106.46987915039061,
+            39.49344386279537
+          ],
+          [
+            -105.30807495117188,
+            39.49344386279537
+          ],
+          [
+            -105.30807495117188,
+            39.80959097923673
+          ],
+          [
+            -106.46987915039061,
+            39.80959097923673
+          ],
+          [
+            -106.46987915039061,
+            39.49344386279537
+          ]
+        ]
+      ]
+    }
+  },
+  "currency": "USD",
+  "trafficRule": "right",
+  "feeds": [
+    "us-vailtransit"
+  ]
+}

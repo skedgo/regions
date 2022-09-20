@@ -1,0 +1,12 @@
+{
+  "id": "us-part",
+  "name": "PART",
+  "type": "gtfs",
+  "source": {
+    "url": "https://transitfeeds.com/p/piedmont-authority-for-regional-transportation/538/latest/download"
+  },
+  "dataProvider": {
+    "name": "PART",
+    "url": "https://www.partnc.org/"
+  }
+}
