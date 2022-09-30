@@ -1,0 +1,12 @@
+{
+  "id": "us-mettransit",
+  "name": "MET Transit",
+  "type": "gtfs",
+  "source": {
+    "url": ""
+  },
+  "dataProvider": {
+    "name": "MET Transit",
+    "url": "https://www.billingsmt.gov/3042/MET"
+  }
+}

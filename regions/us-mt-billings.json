@@ -1,0 +1,58 @@
+{
+  "code": {
+    "countryCode": "US",
+    "subdivisionCode": "MT",
+    "cityName": "Billings"
+  },
+  "timezone": "America/Denver",
+  "locale": {
+    "language": "en",
+    "country": "US"
+  },
+  "coverage": {
+    "cities": [
+      {
+        "lat": 45.78691845071048  ,
+        "lng": -108.49771499633789,
+        "name": "Billings"
+      },
+      {
+        "lat": 45.66990452533258,
+        "lng": -108.77074241638184,
+        "name": "Laurel"
+      }
+    ],
+    "polygon": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            -108.79898071289062,
+            45.63660699062749
+          ],
+          [
+            -108.20777893066406,
+            45.63660699062749
+          ],
+          [
+            -108.20777893066406,
+            45.90625544858718
+          ],
+          [
+            -108.79898071289062,
+            45.90625544858718
+          ],
+          [
+            -108.79898071289062,
+            45.63660699062749
+          ]
+        ]
+      ]
+    }
+  },
+  "currency": "USD",
+  "trafficRule": "right",
+  "feeds": [
+    "us-mettransit"
+  ]
+}
