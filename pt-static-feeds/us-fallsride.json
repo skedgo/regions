@@ -1,0 +1,12 @@
+{
+  "id": "us-fallsride",
+  "name": "Falls Ride",
+  "type": "gtfs",
+  "source": {
+    "url": ""
+  },
+  "dataProvider": {
+    "name": "Falls Ride",
+    "url": "http://www.wichitafallstx.gov/339/Falls-Ride---Public-Transportation"
+  }
+}

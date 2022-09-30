@@ -1,0 +1,63 @@
+{
+  "code": {
+    "countryCode": "US",
+    "subdivisionCode": "TX",
+    "cityName": "Wichita Falls"
+  },
+  "timezone": "America/Chicago",
+  "locale": {
+    "language": "en",
+    "country": "US"
+  },
+  "coverage": {
+    "cities": [
+      {
+        "lat": 33.900911621101685,
+        "lng": -98.50513458251953,
+        "name": "Wichita Falls"
+      },
+      {
+        "lat": 33.59317320054998,
+        "lng": -99.2611312866211,
+        "name": "Seymour"
+      },
+      {
+        "lat": 33.55856226340838,
+        "lng": -97.84904479980469,
+        "name": "Bowie"
+      }
+    ],
+    "polygon": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            -99.4097900390625,
+            33.4955977448657
+          ],
+          [
+            -97.52288818359375,
+            33.4955977448657
+          ],
+          [
+            -97.52288818359375,
+            34.264026473152875
+          ],
+          [
+            -99.4097900390625,
+            34.264026473152875
+          ],
+          [
+            -99.4097900390625,
+            33.4955977448657
+          ]
+        ]
+      ]
+    }
+  },
+  "currency": "USD",
+  "trafficRule": "right",
+  "feeds": [
+    "us-fallsride"
+  ]
+}
