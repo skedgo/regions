@@ -1,0 +1,63 @@
+{
+  "code": {
+    "countryCode": "US",
+    "subdivisionCode": "WA",
+    "cityName": "Bellingham"
+  },
+  "timezone": "America/Los_Angeles",
+  "locale": {
+    "language": "en",
+    "country": "US"
+  },
+  "coverage": {
+    "cities": [
+      {
+        "lat": 48.755057047364936,
+        "lng": -122.47919082641602,
+        "name": "Bellingham"
+      },
+      {
+        "lat": 48.41985948302625,
+        "lng": -122.32967376708984,
+        "name": "Mount Vernon"
+      },
+      {
+        "lat": 48.47354720723412,
+        "lng": -122.33096122741699,
+        "name": "Burlington"
+      }
+    ],
+    "polygon": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            -122.8003692626953,
+            48.226959853759155
+          ],
+          [
+            -121.63856506347653,
+            48.226959853759155
+          ],
+          [
+            -121.63856506347653,
+            49.03741780590362
+          ],
+          [
+            -122.8003692626953,
+            49.03741780590362
+          ],
+          [
+            -122.8003692626953,
+            48.226959853759155
+          ]
+        ]
+      ]
+    }
+  },
+  "currency": "USD",
+  "trafficRule": "right",
+  "feeds": [
+    "us-wta"
+  ]
+}
