@@ -1,0 +1,63 @@
+{
+  "code": {
+    "countryCode": "US",
+    "subdivisionCode": "NH",
+    "cityName": "Durham"
+  },
+  "timezone": "America/New_York",
+  "locale": {
+    "language": "en",
+    "country": "US"
+  },
+  "coverage": {
+    "cities": [
+      {
+        "lat": 43.070518008831314,
+        "lng": -70.76105117797852,
+        "name": "Portsmouth"
+      },
+      {
+        "lat": 43.133938066843136,
+        "lng": -70.92584609985352,
+        "name": "Durham"
+      },
+      {
+        "lat": 43.19741756512383,
+        "lng": -70.8753776550293,
+        "name": "Dover"
+      }
+    ],
+    "polygon": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            -71.18865966796875,
+            42.66426107379469
+          ],
+          [
+            -70.48828125,
+            42.66426107379469
+          ],
+          [
+            -70.48828125,
+            43.35713822211053
+          ],
+          [
+            -71.18865966796875,
+            43.35713822211053
+          ],
+          [
+            -71.18865966796875,
+            42.66426107379469
+          ]
+        ]
+      ]
+    }
+  },
+  "currency": "USD",
+  "trafficRule": "right",
+  "feeds": [
+    "us-unh"
+  ]
+}

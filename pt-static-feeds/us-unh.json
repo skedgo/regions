@@ -1,0 +1,12 @@
+{
+  "id": "us-unh",
+  "name": "University of New Hampshire",
+  "type": "gtfs",
+  "source": {
+    "url": ""
+  },
+  "dataProvider": {
+    "name": "University of New Hampshire",
+    "url": "https://www.unh.edu/transportation/"
+  }
+}
