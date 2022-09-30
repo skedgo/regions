@@ -1,0 +1,12 @@
+{
+  "id": "us-vctc",
+  "name": "Ventura County Transportation Commission",
+  "type": "gtfs",
+  "source": {
+    "url": "https://transitfeeds.com/p/ventura-county-transportation-commission/792/latest/download"
+  },
+  "dataProvider": {
+    "name": "Ventura County Transportation Commission",
+    "url": "https://www.goventura.org/es/"
+  }
+}
