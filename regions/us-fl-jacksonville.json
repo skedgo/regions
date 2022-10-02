@@ -1,0 +1,63 @@
+{
+  "code": {
+    "countryCode": "US",
+    "subdivisionCode": "FL",
+    "cityName": "Jacksonville"
+  },
+  "timezone": "America/New_York",
+  "locale": {
+    "language": "en",
+    "country": "US"
+  },
+  "coverage": {
+    "cities": [
+      {
+        "lat": 30.330805347556105,
+        "lng": -81.65416717529297,
+        "name": "Jacksonville"
+      },
+      {
+        "lat": 29.89378749804734,
+        "lng":  -81.31650924682617,
+        "name": "St. Augustine"
+      },
+      {
+        "lat": 30.101103357350834,
+        "lng": -81.61897659301758,
+        "name": "Fruit Cove"
+      }
+    ],
+    "polygon": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            -81.93603515625,
+            29.80013454835905
+          ],
+          [
+            -81.19857788085938,
+            29.80013454835905
+          ],
+          [
+            -81.19857788085938,
+            30.61073172273802
+          ],
+          [
+            -81.93603515625,
+            30.61073172273802
+          ],
+          [
+            -81.93603515625,
+            29.80013454835905
+          ]
+        ]
+      ]
+    }
+  },
+  "currency": "USD",
+  "trafficRule": "right",
+  "feeds": [
+    "us-jta"
+  ]
+}
