@@ -1,6 +1,6 @@
 {
   "id": "us-greaterportlandmetro",
-  "name": "Greater Portland Metro",
+  "name": "GreaterPortlandMetro",
   "type": "gtfs",
   "source": {
     "url": "http://smttracker.com/downloads/gtfs/greater-portland-me.zip."

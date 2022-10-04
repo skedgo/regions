@@ -1,6 +1,6 @@
 {
   "id": "us-godurham",
-  "name": "Go Durham",
+  "name": "GoDurham",
   "type": "gtfs",
   "source": {
     "url": "http://data.trilliumtransit.com/gtfs/durham-area-transit-authority-nc-us/durham-area-transit-authority-nc-us.zip"

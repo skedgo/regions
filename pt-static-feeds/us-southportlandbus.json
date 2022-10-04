@@ -1,6 +1,6 @@
 {
   "id": "us-southportlandbus",
-  "name": "South Portland Bus",
+  "name": "SouthPortlandBus",
   "type": "gtfs",
   "source": {
     "url": "http://www.smttracker.com/downloads/gtfs/south-portland-me-us.zip"
