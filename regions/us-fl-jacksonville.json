@@ -58,6 +58,6 @@
   "currency": "USD",
   "trafficRule": "right",
   "feeds": [
-    "us-jta"
+    "us-jta", "us-sunshinebus"
   ]
 }
