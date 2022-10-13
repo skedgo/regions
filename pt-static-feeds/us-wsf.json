@@ -1,0 +1,12 @@
+{
+  "id": "us-wsf",
+  "name": "Washington State Ferries",
+  "type": "gtfs",
+  "source": {
+    "url": "https://business.wsdot.wa.gov/Transit/csv_files/wsf/google_transit.zip"
+  },
+  "dataProvider": {
+    "name": "Washington State Ferries",
+    "url": "https://wsdot.wa.gov/travel/washington-state-ferries"
+  }
+}
