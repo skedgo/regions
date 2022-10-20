@@ -1,10 +1,7 @@
 package com.buzzhives.validator;
 
 
-import com.buzzhives.model.Code;
-import com.buzzhives.model.PtRealtimeFeedSchema;
-import com.buzzhives.model.PtStaticFeedSchema;
-import com.buzzhives.model.RegionSchema;
+import com.buzzhives.model.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonParser;
 import com.networknt.schema.JsonSchema;
@@ -38,6 +35,7 @@ import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.ZoneId;
+import java.util.Locale;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -225,6 +223,19 @@ class ValidatorApplicationTests {
             val publicTransportFeedRefs = region.getFeeds();
             if (publicTransportFeedRefs != null && !publicTransportFeedRefs.isEmpty())
                 Assertions.assertThat(publicTransportFeedsMap).containsKeys(publicTransportFeedRefs.toArray(new String[0]));
+
+            //check for vehicle cost information
+            val vehicleCost = region.getVehicleCost();
+            if (vehicleCost != null) {
+                val averageCostPerKm = vehicleCost.getAverageCostPerKm();
+                if (averageCostPerKm != null) {
+                    val vehicleTypes = new HashSet<AverageCostPerKm.VehicleType>();
+                    for (val costPerKm : averageCostPerKm)
+                        Assertions.assertThat(vehicleTypes.add(costPerKm.getVehicleType()))
+                                .withFailMessage("vehicle cost should be specified once per type")
+                                .isTrue();
+                }
+            }
         }
 
         log.info("no errors detected");
