@@ -1,0 +1,12 @@
+{
+  "id": "us-sunshinebus",
+  "name": "Sunshine Bus",
+  "type": "gtfs",
+  "source": {
+    "url": "http://data.trilliumtransit.com/gtfs/sunshinebuscompany-fl-us/sunshinebuscompany-fl-us.zip"
+  },
+  "dataProvider": {
+    "name": "Sunshine Bus",
+    "url": "https://www.staugbch.com/community/page/public-transportation"
+  }
+}

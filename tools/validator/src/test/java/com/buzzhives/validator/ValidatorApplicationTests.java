@@ -6,6 +6,7 @@ import com.buzzhives.model.PtRealtimeFeedSchema;
 import com.buzzhives.model.PtStaticFeedSchema;
 import com.buzzhives.model.RegionSchema;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonParser;
 import com.networknt.schema.JsonSchema;
 import com.networknt.schema.JsonSchemaFactory;
 import com.networknt.schema.SpecVersion;
@@ -20,12 +21,17 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
+import org.mobilitydata.gtfsvalidator.io.ValidationReportDeserializer;
+import org.mobilitydata.gtfsvalidator.runner.ValidationRunner;
+import org.mobilitydata.gtfsvalidator.runner.ValidationRunnerConfig;
+import org.mobilitydata.gtfsvalidator.util.VersionResolver;
 import org.springframework.boot.test.context.SpringBootTest;
 import us.dustinj.timezonemap.TimeZone;
 import us.dustinj.timezonemap.TimeZoneMap;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
+import java.io.*;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
@@ -53,6 +59,9 @@ class ValidatorApplicationTests {
 
     @NotNull
     private static final String PT_REALTIME_FEEDS_DIR = BASE_DIR + "pt-realtime-feeds/";
+
+    @NotNull
+    private static final String GTFS_VALIDATOR_REPORT_BASE_DIR = "gtfs-validation-reports/";
 
     @NotNull
     private static final JsonSchema REGION_SCHEMA;
@@ -158,9 +167,15 @@ class ValidatorApplicationTests {
         log.info("verifying pt-static-feeds...");
         val publicTransportFeedsMap = new HashMap<String, PtStaticFeedSchema>();
         for (val publicTransportFeed : publicTransportFeeds) {
-            Assertions.assertThat(publicTransportFeed.getId()).isNotIn(publicTransportFeedsMap.keySet());
-            publicTransportFeedsMap.put(publicTransportFeed.getId(), publicTransportFeed);
-            Assertions.assertThat(publicTransportFeed.getSource().getUrl()).is(validUrlCondition);
+            val feedId = publicTransportFeed.getId();
+            Assertions.assertThat(feedId).isNotIn(publicTransportFeedsMap.keySet());
+            publicTransportFeedsMap.put(feedId, publicTransportFeed);
+            val url = publicTransportFeed.getSource().getUrl();
+            Assertions.assertThat(url).is(validUrlCondition);
+
+            if (publicTransportFeed.getType() == PtStaticFeedSchema.Type.GTFS)
+                validateGtfs(feedId, url);
+
             Assertions.assertThat(publicTransportFeed.getDataProvider().getUrl()).is(validUrlCondition);
 
             val apiInformation = publicTransportFeed.getSource().getApiInformation();
@@ -213,6 +228,38 @@ class ValidatorApplicationTests {
         }
 
         log.info("no errors detected");
+    }
+
+    void validateGtfs(@NotNull String feedId,
+                      @NotNull String url) {
+        try {
+            log.info("validating gtfs -> " + feedId);
+            val validationOutputDir = GTFS_VALIDATOR_REPORT_BASE_DIR + File.separator + feedId;
+            val runner = new ValidationRunner(new VersionResolver());
+            val builder = ValidationRunnerConfig.builder();
+            builder.setGtfsSource(new URI(url));
+            builder.setOutputDirectory(Path.of(validationOutputDir));
+            runner.run(builder.build());
+            val jsonElement = JsonParser.parseReader(new FileReader(validationOutputDir + File.separator + "report.json"));
+            val validationReport = new ValidationReportDeserializer().deserialize(jsonElement, null, null);
+            for (val errorNotice : validationReport.getErrorNotices()) {
+                val severity = errorNotice.getSeverity();
+                val msg = String.format("    %s, amount: %d", errorNotice.getCode(), errorNotice.getTotalNotices());
+                switch (severity){
+                    case INFO:
+                        log.info(msg);
+                        break;
+                    case WARNING:
+                        log.warn(msg);
+                        break;
+                    case ERROR:
+                        log.error(msg);
+                        break;
+                }
+            }
+        } catch (URISyntaxException | FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

@@ -1,0 +1,12 @@
+{
+  "id": "us-ometro",
+  "name": "Omaha Metro",
+  "type": "gtfs",
+  "source": {
+    "url": "https://s3.amazonaws.com/omaha-metro/TrapezeExport/google_transit.zip"
+  },
+  "dataProvider": {
+    "name": "Omaha Metro",
+    "url": "https://www.ometro.com/"
+  }
+}
