@@ -68,6 +68,6 @@
   "currency": "USD",
   "trafficRule": "right",
   "feeds": [
-    "us-vctc"
+    "us-vctc", "us-sbmtd", "us-santaclaritatransit", "us-toakstransit", "us-gct"
   ]
 }

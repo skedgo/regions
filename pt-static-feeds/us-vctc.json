@@ -3,7 +3,7 @@
   "name": "Ventura County Transportation Commission",
   "type": "gtfs",
   "source": {
-    "url": "https://transitfeeds.com/p/ventura-county-transportation-commission/792/latest/download"
+    "url": "http://data.trilliumtransit.com/gtfs/vctc-ca-us/vctc-ca-us.zip"
   },
   "dataProvider": {
     "name": "Ventura County Transportation Commission",
