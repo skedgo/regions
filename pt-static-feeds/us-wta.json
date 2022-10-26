@@ -1,0 +1,14 @@
+
+
+{
+"id": "us-wta",
+"name": "Whatcom Transportation Authority",
+"type": "gtfs",
+"source": {
+"url": "https://github.com/whatcomtrans/publicwtadata/raw/master/GTFS/wta_gtfs_latest.zip"
+},
+"dataProvider": {
+"name": "Whatcom Transportation Authority",
+"url": "https://www.ridewta.com/"
+}
+}

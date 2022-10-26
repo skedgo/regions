@@ -3,4 +3,5 @@
     <include resource="org/springframework/boot/logging/logback/base.xml" />
     <logger name="org.springframework" level="ERROR"/>
     <logger name="com.networknt.schema.JsonMetaSchema" level="ERROR"/>
+    <logger name="org.mobilitydata" level="ERROR" />
 </configuration>

@@ -1,0 +1,58 @@
+{
+  "code": {
+    "countryCode": "US",
+    "subdivisionCode": "NE",
+    "cityName": "Omaha"
+  },
+  "timezone": "America/Chicago",
+  "locale": {
+    "language": "en",
+    "country": "US"
+  },
+  "coverage": {
+    "cities": [
+      {
+        "lat": 41.25780733317662,
+        "lng": -95.93982696533203,
+        "name": "Omaha"
+      },
+      {
+        "lat": 41.143501411390766,
+        "lng": -95.91236114501953,
+        "name": "Belle Vue"
+      }
+    ],
+    "polygon": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            -96.34185791015625,
+            41.072104440201606
+          ],
+          [
+            -95.67031860351562,
+            41.072104440201606
+          ],
+          [
+            -95.67031860351562,
+            41.37474755643594
+          ],
+          [
+            -96.34185791015625,
+            41.37474755643594
+          ],
+          [
+            -96.34185791015625,
+            41.072104440201606
+          ]
+        ]
+      ]
+    }
+  },
+  "currency": "USD",
+  "trafficRule": "right",
+  "feeds": [
+    "us-ometro"
+  ]
+}

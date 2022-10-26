@@ -1,0 +1,12 @@
+{
+  "id": "us-jta",
+  "name": "Jacksonville Transportation Authority",
+  "type": "gtfs",
+  "source": {
+    "url": "https://schedules.jtafla.com/SchedulesGtfs/Download"
+  },
+  "dataProvider": {
+    "name": "Jacksonville Transportation Authority",
+    "url": "https://www.jtafla.com/"
+  }
+}
