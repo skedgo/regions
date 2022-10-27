@@ -231,20 +231,24 @@ class ValidatorApplicationTests {
                 val averageCostPerLiter = vehicleCost.getAverageCostPerLiter();
                 if (averageCostPerLiter != null) {
                     val fuelTypes = new HashSet<AverageCostPerLiter.FuelType>();
-                    for (val costPerLiter : averageCostPerLiter)
-                        Assertions.assertThat(fuelTypes.add(costPerLiter.getFuelType()))
-                                .withFailMessage("fuel cost should be specified once per type")
+                    for (val costPerLiter : averageCostPerLiter) {
+                        val fuelType = costPerLiter.getFuelType();
+                        Assertions.assertThat(fuelTypes.add(fuelType))
+                                .withFailMessage("fuel cost should be specified once per type, and there is more than one entry for " + fuelType.value())
                                 .isTrue();
+                    }
                 }
 
 
                 val averageCostPerKm = vehicleCost.getAverageCostPerKm();
                 if (averageCostPerKm != null) {
                     val vehicleTypes = new HashSet<AverageCostPerKm.VehicleType>();
-                    for (val costPerKm : averageCostPerKm)
-                        Assertions.assertThat(vehicleTypes.add(costPerKm.getVehicleType()))
-                                .withFailMessage("vehicle cost should be specified once per type")
+                    for (val costPerKm : averageCostPerKm) {
+                        val vehicleType = costPerKm.getVehicleType();
+                        Assertions.assertThat(vehicleTypes.add(vehicleType))
+                                .withFailMessage("vehicle cost should be specified once per type, and there is more than one entry for " + vehicleType.value())
                                 .isTrue();
+                    }
                 }
             }
         }
