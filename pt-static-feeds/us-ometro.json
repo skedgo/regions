@@ -3,7 +3,7 @@
   "name": "Omaha Metro",
   "type": "gtfs",
   "source": {
-    "url": "https://s3.amazonaws.com/omaha-metro/TrapezeExport/google_transit.zip"
+    "url": "https://drive.google.com/uc?export=download&id=1CtljMG4EgKsOF9yiSKpPDrMuZyGa1ykY"
   },
   "dataProvider": {
     "name": "Omaha Metro",
