@@ -227,6 +227,17 @@ class ValidatorApplicationTests {
             //check for vehicle cost information
             val vehicleCost = region.getVehicleCost();
             if (vehicleCost != null) {
+
+                val averageCostPerLiter = vehicleCost.getAverageCostPerLiter();
+                if (averageCostPerLiter != null) {
+                    val fuelTypes = new HashSet<AverageCostPerLiter.FuelType>();
+                    for (val costPerLiter : averageCostPerLiter)
+                        Assertions.assertThat(fuelTypes.add(costPerLiter.getFuelType()))
+                                .withFailMessage("fuel cost should be specified once per type")
+                                .isTrue();
+                }
+
+
                 val averageCostPerKm = vehicleCost.getAverageCostPerKm();
                 if (averageCostPerKm != null) {
                     val vehicleTypes = new HashSet<AverageCostPerKm.VehicleType>();

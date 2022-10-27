@@ -105,8 +105,24 @@
       "properties": {
         "averageCostPerLiter": {
           "description": "Average fuel cost per liter.",
-          "type": "number",
-          "exclusiveMinimum": 0
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "fuelType": {
+                "description": "Type of the fuel.",
+                "enum": [ "petrol", "diesel", "lpg", "hybrid", "electric" ]
+              },
+              "averageCost": {
+                "description": "Average cost per liter of this fuel type.",
+                "type": "number",
+                "minimum": 0
+              }
+            },
+            "required": [ "fuelType", "averageCost" ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
         },
         "averageCostPerKm": {
           "description": "Average cost using a vehicle per km.",
