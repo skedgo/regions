@@ -14,6 +14,7 @@ import lombok.val;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.Condition;
 import org.geotools.geojson.geom.GeometryJSON;
+import org.javatuples.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 import org.locationtech.jts.geom.Coordinate;
@@ -228,10 +229,10 @@ class ValidatorApplicationTests {
             val vehicleCost = region.getVehicleCost();
             if (vehicleCost != null) {
 
-                val averageCostPerLiter = vehicleCost.getAverageCostPerLiter();
-                if (averageCostPerLiter != null) {
-                    val fuelTypes = new HashSet<AverageCostPerLiter.FuelType>();
-                    for (val costPerLiter : averageCostPerLiter) {
+                val averageCostPerUnit = vehicleCost.getAverageCostPerUnit();
+                if (averageCostPerUnit != null) {
+                    val fuelTypes = new HashSet<AverageCostPerUnit.FuelType>();
+                    for (val costPerLiter : averageCostPerUnit) {
                         val fuelType = costPerLiter.getFuelType();
                         Assertions.assertThat(fuelTypes.add(fuelType))
                                 .withFailMessage("fuel cost should be specified once per type, and there is more than one entry for " + fuelType.value())
@@ -239,14 +240,15 @@ class ValidatorApplicationTests {
                     }
                 }
 
-
                 val averageCostPerKm = vehicleCost.getAverageCostPerKm();
                 if (averageCostPerKm != null) {
-                    val vehicleTypes = new HashSet<AverageCostPerKm.VehicleType>();
+                    val vehicleTypes = new HashSet<Pair<AverageCostPerKm.VehicleType, Boolean>>();
                     for (val costPerKm : averageCostPerKm) {
                         val vehicleType = costPerKm.getVehicleType();
-                        Assertions.assertThat(vehicleTypes.add(vehicleType))
-                                .withFailMessage("vehicle cost should be specified once per type, and there is more than one entry for " + vehicleType.value())
+                        val isHybrid = costPerKm.getHybrid();
+                        val pair = new Pair<>(vehicleType, isHybrid);
+                        Assertions.assertThat(vehicleTypes.add(pair))
+                                .withFailMessage(String.format("vehicle cost should be specified once per type, and there is more than one entry for %s%s", isHybrid ? "hybrid ":"", vehicleType.value()))
                                 .isTrue();
                     }
                 }
