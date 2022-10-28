@@ -1,0 +1,12 @@
+{
+  "id": "us-gct",
+  "name": "Gold Coast Transit",
+  "type": "gtfs",
+  "source": {
+    "url": "https://www.goldcoasttransit.org/images/GTFS/GTFS.zip"
+  },
+  "dataProvider": {
+    "name": "Gold Coast Transit",
+    "url": "https://www.goldcoasttransit.org"
+  }
+}
