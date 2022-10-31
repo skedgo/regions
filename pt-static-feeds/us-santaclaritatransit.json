@@ -1,0 +1,12 @@
+{
+  "id": "us-santaclaritatransit",
+  "name": "Santa Clarita Transit",
+  "type": "gtfs",
+  "source": {
+    "url": "https://apps.santaclaritatransit.com/rtt/public/utility/gtfs.aspx"
+  },
+  "dataProvider": {
+    "name": "Santa Clarita Transit",
+    "url": "https://apps.santaclaritatransit.com"
+  }
+}

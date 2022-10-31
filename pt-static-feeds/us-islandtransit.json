@@ -1,0 +1,12 @@
+{
+  "id": "us-islandtransit",
+  "name": "Island Transit",
+  "type": "gtfs",
+  "source": {
+    "url": "https://data.trilliumtransit.com/gtfs/islandtransit-wa-us/islandtransit-wa-us.zip"
+  },
+  "dataProvider": {
+    "name": "Islan Transit",
+    "url": "https://www.islandtransit.org/"
+  }
+}

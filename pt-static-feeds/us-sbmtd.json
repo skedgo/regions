@@ -1,0 +1,12 @@
+{
+  "id": "us-sbmtd",
+  "name": "Santa Barbara Metropolitan Transit District",
+  "type": "gtfs",
+  "source": {
+    "url": "https://sbmtd.gov/google_transit/feed.zip"
+  },
+  "dataProvider": {
+    "name": "Santa Barbara Metropolitan Transit District",
+    "url": "https://sbmtd.gov/"
+  }
+}

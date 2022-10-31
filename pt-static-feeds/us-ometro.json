@@ -1,0 +1,12 @@
+{
+  "id": "us-ometro",
+  "name": "Omaha Metro",
+  "type": "gtfs",
+  "source": {
+    "url": "https://drive.google.com/uc?export=download&id=1CtljMG4EgKsOF9yiSKpPDrMuZyGa1ykY"
+  },
+  "dataProvider": {
+    "name": "Omaha Metro",
+    "url": "https://www.ometro.com/"
+  }
+}

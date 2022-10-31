@@ -1,0 +1,81 @@
+{
+  "code": {
+    "countryCode": "US",
+    "subdivisionCode": "CA",
+    "cityName": "Ventura"
+  },
+  "timezone": "America/Los_Angeles",
+  "locale": {
+    "language": "en",
+    "country": "US"
+  },
+  "coverage": {
+    "cities": [
+      {
+        "lat": 34.27927610229498,
+        "lng": -119.29367065429688,
+        "name": "Ventura"
+      },
+      {
+        "lat": 34.197463188955,
+        "lng": -119.18071746826172,
+        "name": "Oxnard"
+      },
+      {
+        "lat": 34.220745031564135,
+        "lng": -119.03995513916016,
+        "name": "Camarillo"
+      },
+      {
+        "lat": 34.17204456998344,
+        "lng": -118.84340286254883,
+        "name": "Thousand Oaks"
+      },
+      {
+        "lat":  34.42022166884994,
+        "lng": -119.69947814941406,
+        "name": "Santa Barbara"
+      }
+    ],
+    "polygon": {
+      "coordinates": [
+        [
+          [
+            -119.28534697400826,
+            34.03185211783373
+          ],
+          [
+            -118.55122813543818,
+            33.973697854284985
+          ],
+          [
+            -118.21983892502438,
+            34.3476827546614
+          ],
+          [
+            -118.88313316311636,
+            34.90454089556435
+          ],
+          [
+            -119.75144147570647,
+            34.797453766769095
+          ],
+          [
+            -119.99389701610691,
+            34.42908757321255
+          ],
+          [
+            -119.28534697400826,
+            34.03185211783373
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    }
+  },
+  "currency": "USD",
+  "trafficRule": "right",
+  "feeds": [
+    "us-vctc", "us-sbmtd", "us-santaclaritatransit", "us-toakstransit", "us-gct"
+  ]
+}

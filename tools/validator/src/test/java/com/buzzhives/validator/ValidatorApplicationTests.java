@@ -279,5 +279,4 @@ class ValidatorApplicationTests {
             throw new RuntimeException(e);
         }
     }
-
 }
