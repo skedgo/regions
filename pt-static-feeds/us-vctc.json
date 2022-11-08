@@ -1,0 +1,12 @@
+{
+  "id": "us-vctc",
+  "name": "Ventura County Transportation Commission",
+  "type": "gtfs",
+  "source": {
+    "url": "http://data.trilliumtransit.com/gtfs/vctc-ca-us/vctc-ca-us.zip"
+  },
+  "dataProvider": {
+    "name": "Ventura County Transportation Commission",
+    "url": "https://www.goventura.org/es/"
+  }
+}

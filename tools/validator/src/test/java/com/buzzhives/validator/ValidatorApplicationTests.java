@@ -15,6 +15,7 @@ import org.assertj.core.api.Assertions;
 import org.assertj.core.api.Condition;
 import org.geotools.geojson.geom.GeometryJSON;
 import org.javatuples.Pair;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 import org.locationtech.jts.geom.Coordinate;
@@ -74,7 +75,6 @@ class ValidatorApplicationTests {
     private static final Set<String> ISO_LANGUAGES = Arrays.stream(Locale.getISOLanguages()).collect(Collectors.toSet());
     private static final Set<String> ISO_COUNTRIES = Arrays.stream(Locale.getISOCountries()).collect(Collectors.toSet());
     private static final Set<String> ISO_CURRENCIES = Currency.getAvailableCurrencies().stream().map(Currency::getCurrencyCode).collect(Collectors.toSet());
-
 
     static {
         val factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V7);
@@ -153,6 +153,7 @@ class ValidatorApplicationTests {
 
         val validUrlCondition = new Condition<>(ValidatorApplicationTests::isUrlValid, "a valid URL");
 
+        val feedReports = new HashSet<FeedReport>();
 
         log.info("verifying pt-realtime-feeds...");
         val realtimeDataFeedsMap = new HashMap<String, PtRealtimeFeedSchema>();
@@ -173,7 +174,7 @@ class ValidatorApplicationTests {
             Assertions.assertThat(url).is(validUrlCondition);
 
             if (publicTransportFeed.getType() == PtStaticFeedSchema.Type.GTFS)
-                validateGtfs(feedId, url);
+                feedReports.add(validateGtfs(feedId, url));
 
             Assertions.assertThat(publicTransportFeed.getDataProvider().getUrl()).is(validUrlCondition);
 
@@ -255,11 +256,17 @@ class ValidatorApplicationTests {
             }
         }
 
-        log.info("no errors detected");
+
+        log.info("Summary:");
+        feedReports.stream()
+                .map(FeedReport::getReportMessage)
+                .forEach(log::info);
     }
 
-    void validateGtfs(@NotNull String feedId,
-                      @NotNull String url) {
+    @NotNull
+    @Contract("_, _ -> new")
+    private FeedReport validateGtfs(@NotNull String feedId,
+                                    @NotNull String url) {
         try {
             log.info("validating gtfs -> " + feedId);
             val validationOutputDir = GTFS_VALIDATOR_REPORT_BASE_DIR + File.separator + feedId;
@@ -270,24 +277,34 @@ class ValidatorApplicationTests {
             runner.run(builder.build());
             val jsonElement = JsonParser.parseReader(new FileReader(validationOutputDir + File.separator + "report.json"));
             val validationReport = new ValidationReportDeserializer().deserialize(jsonElement, null, null);
+
+            int ignoredWarnings = 0;
+            int ignoredErrors = 0;
+
             for (val errorNotice : validationReport.getErrorNotices()) {
                 val severity = errorNotice.getSeverity();
                 val msg = String.format("    %s, amount: %d", errorNotice.getCode(), errorNotice.getTotalNotices());
                 switch (severity){
-                    case INFO:
+                    case INFO: {
                         log.info(msg);
                         break;
-                    case WARNING:
+                    }
+                    case WARNING: {
                         log.warn(msg);
+                        ignoredWarnings++;
                         break;
-                    case ERROR:
+                    }
+                    case ERROR: {
                         log.error(msg);
+                        ignoredErrors++;
                         break;
+                    }
                 }
             }
+
+            return new FeedReport(feedId, ignoredWarnings, ignoredErrors);
         } catch (URISyntaxException | FileNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
-
 }
