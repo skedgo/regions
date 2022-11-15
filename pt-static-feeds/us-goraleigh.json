@@ -1,0 +1,13 @@
+{
+  "id": "us-goraleigh",
+  "name": "Go Raleigh",
+  "type": "gtfs",
+  "source": {
+    "url": "http://data.trilliumtransit.com/gtfs/capital-area-transit-nc-us/capital-area-transit-nc-us.zip"
+  },
+  "dataProvider": {
+    "name": "Go Raleigh",
+    "url": "https://goraleigh.org/developer-resources"
+  }
+}
+
