@@ -1,0 +1,12 @@
+{
+  "id": "us-gmv",
+  "name": "GMV Syncromatics data",
+  "type": "gtfs",
+  "source": {
+    "url": "https://govcbus.com/gtfs"
+  },
+  "dataProvider": {
+    "name": "GMV Syncromatics",
+    "url": "https://gmvsyncromatics.com/"
+  }
+}
