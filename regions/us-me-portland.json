@@ -75,6 +75,6 @@
   "currency": "USD",
   "trafficRule": "right",
   "feeds": [
-    "us-greaterportlandmetro"
+    "us-greaterportlandmetro", "us-southportlandbus", "us-cascobaylines"
   ]
 }
