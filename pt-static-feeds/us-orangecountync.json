@@ -1,0 +1,12 @@
+{
+  "id": "us-orangecountync",
+  "name": "Orange County Public Transportation",
+  "type": "gtfs",
+  "source": {
+    "url": "http://orangecountync.gov/transportation"
+  },
+  "dataProvider": {
+    "name": "Orange County NC",
+    "url": "http://orangecountync.gov/"
+  }
+}
