@@ -1,0 +1,12 @@
+{
+  "id": "ca-saultstemarietransit",
+  "name": "Sault Ste. Marie Transit",
+  "type": "gtfs",
+  "source": {
+    "url": "https://metrolinx.tmix.se/gtfs/gtfs-SaultSteMarie.zip"
+  },
+  "dataProvider": {
+    "name": "Sault Ste. Marie Transit",
+    "url": "https://saultstemarie.ca"
+  }
+}
