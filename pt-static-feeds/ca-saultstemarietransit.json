@@ -6,7 +6,7 @@
     "url": "https://metrolinx.tmix.se/gtfs/gtfs-SaultSteMarie.zip"
   },
   "dataProvider": {
-    "name": "Sault Ste. Marie Transit",
-    "url": "https://saultstemarie.ca"
+    "name": "Consat Telematics AB",
+    "url": "http://www.consat.se"
   }
 }
