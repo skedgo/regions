@@ -1,0 +1,13 @@
+{
+  "id": "us-skagit",
+  "name": "Skagit Transit",
+  "type": "gtfs",
+  "source": {
+    "url": "https://strweb.skagittransit.org/GTFS/google_transit.zip"
+  },
+  "dataProvider": {
+    "name": "Skagit Transit",
+    "url": "https://www.skagittransit.org"
+  }
+
+}
