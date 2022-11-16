@@ -81,5 +81,5 @@
     }},
   "currency": "USD",
   "trafficRule": "right",
-  "feeds": [ "us-gocary", "us-godurham", "us-gotriangle", "us-ridertransit",  "us-part" ]
+  "feeds": [ "us-gocary", "us-godurham", "us-gotriangle", "us-ridertransit",  "us-part", "us-orangecountync", "us-goraleigh" ]
 }

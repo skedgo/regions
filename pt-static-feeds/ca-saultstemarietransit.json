@@ -1,0 +1,12 @@
+{
+  "id": "ca-saultstemarietransit",
+  "name": "Sault Ste Marie Transit",
+  "type": "gtfs",
+  "source": {
+    "url": "https://metrolinx.tmix.se/gtfs/gtfs-SaultSteMarie.zip"
+  },
+  "dataProvider": {
+    "name": "Consat Telematics AB",
+    "url": "http://www.consat.se"
+  }
+}

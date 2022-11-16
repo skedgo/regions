@@ -78,6 +78,6 @@
   "currency": "USD",
   "trafficRule": "right",
   "feeds": [
-    "us-wta", "us-wsf", "us-islandtransit"
+    "us-wta", "us-wsf", "us-islandtransit", "us-skagit"
   ]
 }
