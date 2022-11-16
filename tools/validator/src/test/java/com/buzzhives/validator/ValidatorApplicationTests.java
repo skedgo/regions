@@ -1,10 +1,7 @@
 package com.buzzhives.validator;
 
 
-import com.buzzhives.model.Code;
-import com.buzzhives.model.PtRealtimeFeedSchema;
-import com.buzzhives.model.PtStaticFeedSchema;
-import com.buzzhives.model.RegionSchema;
+import com.buzzhives.model.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonParser;
 import com.networknt.schema.JsonSchema;
@@ -17,6 +14,7 @@ import lombok.val;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.Condition;
 import org.geotools.geojson.geom.GeometryJSON;
+import org.javatuples.Pair;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
@@ -39,6 +37,7 @@ import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.ZoneId;
+import java.util.Locale;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -226,6 +225,35 @@ class ValidatorApplicationTests {
             val publicTransportFeedRefs = region.getFeeds();
             if (publicTransportFeedRefs != null && !publicTransportFeedRefs.isEmpty())
                 Assertions.assertThat(publicTransportFeedsMap).containsKeys(publicTransportFeedRefs.toArray(new String[0]));
+
+            //check for vehicle cost information
+            val vehicleCost = region.getVehicleCost();
+            if (vehicleCost != null) {
+
+                val averageCostPerUnit = vehicleCost.getAverageCostPerUnit();
+                if (averageCostPerUnit != null) {
+                    val fuelTypes = new HashSet<AverageCostPerUnit.FuelType>();
+                    for (val costPerLiter : averageCostPerUnit) {
+                        val fuelType = costPerLiter.getFuelType();
+                        Assertions.assertThat(fuelTypes.add(fuelType))
+                                .withFailMessage("fuel cost should be specified once per type, and there is more than one entry for " + fuelType.value())
+                                .isTrue();
+                    }
+                }
+
+                val averageCostPerKm = vehicleCost.getAverageCostPerKm();
+                if (averageCostPerKm != null) {
+                    val vehicleTypes = new HashSet<Pair<AverageCostPerKm.VehicleType, Boolean>>();
+                    for (val costPerKm : averageCostPerKm) {
+                        val vehicleType = costPerKm.getVehicleType();
+                        val isHybrid = costPerKm.getHybrid();
+                        val pair = new Pair<>(vehicleType, isHybrid);
+                        Assertions.assertThat(vehicleTypes.add(pair))
+                                .withFailMessage(String.format("vehicle cost should be specified once per type, and there is more than one entry for %s%s", isHybrid ? "hybrid ":"", vehicleType.value()))
+                                .isTrue();
+                    }
+                }
+            }
         }
 
 

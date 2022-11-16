@@ -99,6 +99,59 @@
       "description": "Traffic side on the road to keep to.",
       "enum": ["left", "right"]
     },
+    "vehicleCost": {
+      "description": "Details about fuel cost in this region.",
+      "type": "object",
+      "properties": {
+        "averageCostPerUnit": {
+          "description": "Average fuel cost per unit (liter for petrol/diesel/lpg and kWh for electric).",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "fuelType": {
+                "description": "Type of the fuel.",
+                "enum": [ "petrol", "diesel", "lpg", "electric" ]
+              },
+              "averageCost": {
+                "description": "Average cost per unit of this fuel type.",
+                "type": "number",
+                "exclusiveMinimum": 0
+              }
+            },
+            "required": [ "fuelType", "averageCost" ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "averageCostPerKm": {
+          "description": "Average cost using a vehicle per km.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "vehicleType": {
+                "description": "Type of this vehicle.",
+                "enum": ["car", "suv", "motorbike"]
+              },
+              "hybrid": {
+                "description": "Whether this vehicle is hybrid or not.",
+                "type": "boolean",
+                "default": false
+              },
+              "averageCost": {
+                "description": "Average cost per km using this type of vehicle.",
+                "type": "number",
+                "exclusiveMinimum": 0
+              }
+            },
+            "required": [ "vehicleType", "averageCost" ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    },
     "feeds": {
       "description": "Set of public transport feeds for this region. Each item must match with a public transport data feed id.",
       "type": "array",
