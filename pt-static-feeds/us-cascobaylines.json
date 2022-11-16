@@ -1,0 +1,14 @@
+{
+  "id": "us-cascobaylines",
+  "name": "Casco Bay Lines",
+  "type": "gtfs",
+  "source": {
+    "url": "http://smttracker.com/downloads/gtfs/cascobaylines-portland-me-usa.zip"
+  },
+  "dataProvider": {
+    "name": "Sothern Main Transit Tracker",
+    "url": "https://smttracker.com/gtfs/"
+  }
+}
+
+
