@@ -1,0 +1,57 @@
+{
+  "code": {
+    "countryCode": "US",
+    "subdivisionCode": "WI",
+    "cityName": "Waupaca"
+  },
+  "timezone": "America/Chicago",
+  "locale": {
+    "language": "en",
+    "country": "US"
+  },
+  "coverage": {
+    "cities": [
+      {
+        "lat":  44.3927,
+        "lng": -88.7399,
+        "name": "New London"
+      },
+      {
+        "lat":  44.3560,
+        "lng":  -89.0908,
+        "name": "Waupaca"
+      }
+    ],
+    "polygon": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            -88.68235339138296,
+            44.21550141031872
+          ],
+          [
+            -88.68235339138296,
+            44.73882072301697
+          ],
+          [
+            -89.31922293645357,
+            44.73882072301697
+          ],
+          [
+            -89.31922293645357,
+            44.21550141031872
+          ],
+          [
+            -88.68235339138296,
+            44.21550141031872
+          ]
+        ]
+      ]
+    }
+  },
+  "currency": "USD",
+  "trafficRule": "right",
+  "feeds": [
+  ]
+}
