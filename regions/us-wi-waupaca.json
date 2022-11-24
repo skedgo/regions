@@ -12,14 +12,14 @@
   "coverage": {
     "cities": [
       {
-        "lat":  44.3927,
-        "lng": -88.7399,
-        "name": "New London"
-      },
-      {
         "lat":  44.3560,
         "lng":  -89.0908,
         "name": "Waupaca"
+      },
+      {
+        "lat":  44.3927,
+        "lng": -88.7399,
+        "name": "New London"
       }
     ],
     "polygon": {
