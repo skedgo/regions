@@ -1,0 +1,12 @@
+{
+  "id": "us-greensboro",
+  "name": "Greensboro",
+  "type": "gtfs",
+  "source": {
+    "url": "https://trackmygta.com/gtfs"
+  },
+  "dataProvider": {
+    "name": "Greensboro Transit Agency",
+    "url": "https://trackmygta.com/"
+  }
+}
